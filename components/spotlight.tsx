@@ -54,12 +54,12 @@ export default function Spotlight({
             <DeviceFrame
               src={screens[0].src}
               alt={screens[0].alt}
-              className="w-44 -rotate-3 translate-y-4 sm:w-56"
+              className="w-36 -rotate-3 translate-y-4 sm:w-56"
             />
             <DeviceFrame
               src={screens[1].src}
               alt={screens[1].alt}
-              className="w-44 rotate-3 -translate-y-2 sm:w-56"
+              className="w-36 rotate-3 -translate-y-2 sm:w-56"
             />
           </div>
         )}

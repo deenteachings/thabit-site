@@ -29,7 +29,7 @@ function PracticeCell({
 }) {
   const { Icon } = practice;
   return (
-    <div className="flex flex-col items-center gap-3 px-3 py-10 text-center transition-colors hover:bg-pressed">
+    <div className="flex flex-col items-center gap-3 border-b border-r border-border px-2 py-8 text-center transition-colors hover:bg-pressed sm:px-3 sm:py-10">
       <Icon className="h-[22px] w-[22px] text-primary" />
       <h3 className="text-[15px] font-semibold tracking-tight text-primary">
         {practice.title}
@@ -50,7 +50,7 @@ export default function Practices() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-3 gap-px border border-border bg-border">
+        <div className="grid grid-cols-3 border-l border-t border-border">
           {PRACTICES.map((practice) => (
             <PracticeCell key={practice.title} practice={practice} />
           ))}

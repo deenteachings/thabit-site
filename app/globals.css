@@ -213,10 +213,10 @@ body {
 
 .device-frame {
   position: relative;
-  border-radius: 44px;
+  border-radius: 36px;
   border: 1px solid var(--border);
   background: var(--elevated);
-  padding: 10px;
+  padding: 6px;
   overflow: hidden;
   box-shadow:
     0 -2px 4px rgba(0, 0, 0, 0.06),
@@ -235,7 +235,7 @@ body {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 34px;
+  border-radius: 30px;
   background: var(--surface);
 }
 

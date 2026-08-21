@@ -38,7 +38,7 @@ export default function ScreensStrip() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 gap-10 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-10">
           {SCREENS.map((screen) => (
             <figure
               key={screen.title}
@@ -47,7 +47,7 @@ export default function ScreensStrip() {
               <DeviceFrame
                 src={screen.src}
                 alt={screen.alt}
-                className="w-40 sm:w-48"
+                className="w-36 sm:w-48"
               />
               <figcaption>
                 <p className="text-[15px] font-semibold tracking-tight text-primary">
