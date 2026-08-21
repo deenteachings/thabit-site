@@ -21,6 +21,7 @@ export default function DeviceFrame({
         width={560}
         height={1217}
         priority={priority}
+        unoptimized
         className="device-screen"
       />
     </div>
