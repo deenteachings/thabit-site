@@ -13,9 +13,9 @@ import {
 const PRACTICES = [
   { title: "Daily", meta: "Morning & evening", Icon: SunIcon },
   { title: "Mind", meta: "Calm · rest · focus", Icon: MindIcon },
-  { title: "Healing", meta: "Qur&apos;an · du&apos;a · grief", Icon: HeartIcon },
+  { title: "Healing", meta: "Qur'an · du'a · grief", Icon: HeartIcon },
   { title: "Programs", meta: "Structured care", Icon: CompassIcon },
-  { title: "Journeys", meta: "Ramadan · grief · du&apos;a", Icon: PathIcon },
+  { title: "Journeys", meta: "Ramadan · grief · du'a", Icon: PathIcon },
   { title: "Soul", meta: "Your quiet progress", Icon: SparkleIcon },
   { title: "Journal", meta: "Private pages", Icon: BookIcon },
   { title: "Sleep", meta: "Solace audio", Icon: MoonIcon },

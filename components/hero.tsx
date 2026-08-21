@@ -1,8 +1,9 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import InkHeroCard from "@/components/ink-hero-card";
 import Logo from "@/components/logo";
+import DeviceFrame from "@/components/device-frame";
+import StoreBadges from "@/components/store-badges";
 
 const emptySubscribe = () => () => {};
 const emptySnapshot = () => "";
@@ -22,7 +23,7 @@ export default function Hero() {
   const today = useToday();
 
   return (
-    <section className="relative border-b border-border">
+    <section className="relative overflow-hidden border-b border-border">
       <div className="mx-auto flex max-w-6xl flex-col items-center px-6 pb-24 pt-16 text-center sm:pt-24">
         <Logo className="mb-10 h-16 w-auto sm:h-20" />
 
@@ -42,24 +43,28 @@ export default function Hero() {
         <p className="mt-6 max-w-2xl text-balance text-[16px] leading-6 text-secondary">
           Thābit is a gentle emotional healing companion — quiet adhkar, a
           listening presence, and small daily practices rooted in authentic
-          sources. For the days when your heart feels too heavy to pray, we
-          built something to sit beside you.
+          sources. Now on the App Store and Google Play.
         </p>
 
-        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
-          <a href="#download" className="btn-pill btn-solid w-full sm:w-auto">
-            Get the app
-          </a>
-          <a
-            href="#practices"
-            className="btn-pill btn-outline w-full sm:w-auto"
-          >
-            See what&apos;s inside
-          </a>
-        </div>
+        <StoreBadges className="mt-10" />
 
-        <div className="mt-16 w-full max-w-md">
-          <InkHeroCard />
+        <div className="relative mt-20 flex items-end justify-center">
+          <DeviceFrame
+            src="/screens/sakinah.webp"
+            alt="Sakinah — the listening companion"
+            className="z-0 -mr-6 w-32 -rotate-6 translate-y-4 sm:-mr-10 sm:w-48"
+          />
+          <DeviceFrame
+            src="/screens/home.webp"
+            alt="Thābit home screen"
+            className="z-10 w-40 sm:w-64"
+            priority
+          />
+          <DeviceFrame
+            src="/screens/athkar.webp"
+            alt="Morning and evening adhkar"
+            className="z-0 -ml-6 w-32 rotate-6 translate-y-4 sm:-ml-10 sm:w-48"
+          />
         </div>
       </div>
     </section>

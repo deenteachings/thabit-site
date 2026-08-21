@@ -3,7 +3,7 @@ import Logo from "@/components/logo";
 
 const NAV_LINKS = [
   { href: "#practices", label: "Inside" },
-  { href: "#moments", label: "Moments" },
+  { href: "#screens", label: "Screens" },
   { href: "#about", label: "About" },
 ];
 

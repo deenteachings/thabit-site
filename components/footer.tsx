@@ -1,4 +1,5 @@
 import Logo from "@/components/logo";
+import { APP_STORE_URL, PLAY_STORE_URL } from "@/components/store-badges";
 
 export default function Footer() {
   return (
@@ -27,6 +28,22 @@ export default function Footer() {
             className="transition-colors hover:text-primary"
           >
             @DropYourDua
+          </a>
+          <a
+            href={APP_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-primary"
+          >
+            App Store
+          </a>
+          <a
+            href={PLAY_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-primary"
+          >
+            Google Play
           </a>
           <a
             href="mailto:hello@thabitapp.com"

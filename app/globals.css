@@ -208,249 +208,34 @@ body {
   border-color: var(--border-strong);
 }
 
-/* ---------- Ink hero card ---------- */
+/* ---------- Device frames (screenshot showcase) ---------- */
 
-.ink-card {
+.device-frame {
   position: relative;
+  border-radius: 44px;
+  border: 1px solid var(--border);
+  background: var(--elevated);
+  padding: 10px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 24px;
-  background: linear-gradient(180deg, #000000 0%, #0a0a0a 45%, #191919 100%);
+  box-shadow:
+    0 -2px 4px rgba(0, 0, 0, 0.06),
+    0 10px 30px rgba(0, 0, 0, 0.02);
 }
 
-.ink-glow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 12%;
-  background: radial-gradient(
-    90% 100% at 50% 0%,
-    rgba(255, 255, 255, 0.14),
-    transparent 70%
-  );
-}
-
-.ink-floor {
-  position: absolute;
-  bottom: -45%;
-  left: 50%;
-  width: 85%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.16),
-    transparent 62%
-  );
-  transform: translateX(-50%);
-  animation: floor-breathe 4.4s ease-in-out infinite alternate;
-}
-
-.ink-mote {
-  position: absolute;
-  bottom: 20%;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  opacity: 0;
-  animation: mote-rise 7.5s linear infinite;
-}
-
-.ink-badge {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.08);
-  padding: 5px 12px;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.62);
-  animation: badge-pulse 2.2s ease-in-out infinite;
-}
-
-.ink-step {
-  height: 2px;
-  border-radius: 999px;
-  flex: 1;
-}
-
-.ink-step-filled {
-  background: rgba(255, 255, 255, 0.9);
-}
-
-.ink-step-current {
-  width: 20px;
-  flex: none;
-  background: rgba(255, 255, 255, 0.9);
-}
-
-.ink-step-pending {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-.onink-primary {
-  color: #ffffff;
-}
-
-.onink-secondary {
-  color: rgba(255, 255, 255, 0.62);
-}
-
-.onink-tertiary {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-/* ---------- Signature moment demos ---------- */
-
-.demo-orb-halo {
-  position: relative;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 1px solid var(--border-strong);
-}
-
-.demo-orb-core {
-  position: absolute;
-  inset: 13px;
-  border-radius: 50%;
-  background: var(--text-primary);
-  animation: orb-breathe 2.6s ease-in-out infinite alternate;
-}
-
-.demo-orb-ripple {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 1px solid var(--text-tertiary);
-  animation: ripple-leave 2.6s ease-out infinite;
-}
-
-.demo-moon-halo {
-  position: relative;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: rgba(128, 128, 128, 0.08);
-  border: 1px solid var(--border-subtle);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: moon-breathe 4s ease-in-out infinite alternate;
-}
-
-.demo-star {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  background: var(--text-tertiary);
-  animation: twinkle 3s ease-in-out infinite;
-}
-
-.demo-heart {
-  animation: heartbeat 1.4s ease-in-out infinite;
-}
-
-/* ---------- Keyframes ---------- */
-
-@keyframes floor-breathe {
-  from {
-    opacity: 0.55;
-    transform: translateX(-50%) scale(1);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) scale(1.12);
+@media (prefers-color-scheme: dark) {
+  .device-frame {
+    box-shadow:
+      0 -2px 4px rgba(255, 255, 255, 0.04),
+      0 10px 30px rgba(0, 0, 0, 0.5);
   }
 }
 
-@keyframes mote-rise {
-  0% {
-    transform: translateY(0);
-    opacity: 0;
-  }
-  12% {
-    opacity: 0.38;
-  }
-  100% {
-    transform: translateY(-120px);
-    opacity: 0;
-  }
-}
-
-@keyframes badge-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.04);
-  }
-}
-
-@keyframes orb-breathe {
-  from {
-    transform: scale(0.72);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes ripple-leave {
-  0% {
-    transform: scale(0.8);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(1.9);
-    opacity: 0;
-  }
-}
-
-@keyframes moon-breathe {
-  from {
-    transform: scale(0.94);
-  }
-  to {
-    transform: scale(1.06);
-  }
-}
-
-@keyframes twinkle {
-  0%,
-  100% {
-    opacity: 0.15;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes heartbeat {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  12% {
-    transform: scale(1.14);
-  }
-  24% {
-    transform: scale(1);
-  }
-  36% {
-    transform: scale(1.2);
-  }
-  50% {
-    transform: scale(1);
-  }
+.device-screen {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 34px;
+  background: var(--surface);
 }
 
 /* ---------- Motion preferences ---------- */
@@ -458,21 +243,6 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-
-  .ink-floor,
-  .ink-mote,
-  .ink-badge,
-  .demo-orb-core,
-  .demo-orb-ripple,
-  .demo-moon-halo,
-  .demo-star,
-  .demo-heart {
-    animation: none;
-  }
-
-  .ink-mote {
-    opacity: 0.38;
   }
 
   .btn-pill:active {
