@@ -52,18 +52,18 @@ export default function Hero() {
           <DeviceFrame
             src="/screens/sakinah.webp"
             alt="Sakinah — the listening companion"
-            className="z-0 -mr-6 w-28 -rotate-6 translate-y-4 sm:-mr-10 sm:w-48"
+            className="z-0 -mr-6 w-28 -rotate-6 translate-y-4 opacity-70 sm:-mr-10 sm:w-48"
           />
           <DeviceFrame
             src="/screens/home.webp"
             alt="Thābit home screen"
-            className="z-10 w-36 sm:w-64"
+            className="z-10 w-36 opacity-90 sm:w-64"
             priority
           />
           <DeviceFrame
             src="/screens/athkar.webp"
             alt="Morning and evening adhkar"
-            className="z-0 -ml-6 w-28 rotate-6 translate-y-4 sm:-ml-10 sm:w-48"
+            className="z-0 -ml-6 w-28 rotate-6 translate-y-4 opacity-70 sm:-ml-10 sm:w-48"
           />
         </div>
       </div>

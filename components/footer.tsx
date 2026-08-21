@@ -22,14 +22,6 @@ export default function Footer() {
             @deenteachings
           </a>
           <a
-            href="https://instagram.com/dropyourdua"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors hover:text-primary"
-          >
-            @DropYourDua
-          </a>
-          <a
             href={APP_STORE_URL}
             target="_blank"
             rel="noopener noreferrer"
@@ -46,10 +38,10 @@ export default function Footer() {
             Google Play
           </a>
           <a
-            href="mailto:hello@thabitapp.com"
+            href="mailto:thabit@deenteachings.com"
             className="transition-colors hover:text-primary"
           >
-            hello@thabitapp.com
+            thabit@deenteachings.com
           </a>
         </nav>
         <p className="text-[12px] text-tertiary">

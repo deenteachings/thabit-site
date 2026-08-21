@@ -13,10 +13,10 @@ export default function QuranBlock() {
           كَفَّرَ اللَّهُ بِهَا مِنْ خَطَايَاهُ
         </p>
         <span
-          className="mx-auto mt-10 block w-7 border-t border-border-strong"
+          className="mx-auto mt-12 block w-7 border-t border-border-strong"
           aria-hidden="true"
         />
-        <p className="mt-8 text-balance text-[16px] italic leading-relaxed text-secondary">
+        <p className="mt-10 text-balance text-[16px] italic leading-relaxed text-secondary">
           &ldquo;No fatigue, nor disease, nor sorrow, nor sadness, nor hurt,
           nor distress befalls a Muslim — not even the prick of a thorn —
           except that Allah expiates some of his sins for it.&rdquo;
