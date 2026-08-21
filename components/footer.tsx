@@ -1,12 +1,12 @@
+import Logo from "@/components/logo";
+
 export default function Footer() {
   return (
     <footer className="border-t border-border">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 px-6 py-12 text-center md:flex-row md:justify-between md:text-left">
-        <div className="flex items-baseline gap-2.5 text-[16px] font-semibold tracking-tight text-primary">
+        <div className="flex items-center gap-2.5 text-[16px] font-semibold tracking-tight text-primary">
+          <Logo className="h-7 w-auto" />
           Thābit
-          <span className="arabic text-lg font-bold" aria-hidden="true">
-            ثابت
-          </span>
         </div>
         <nav
           aria-label="Social"

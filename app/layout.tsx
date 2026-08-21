@@ -13,6 +13,12 @@ export const metadata: Metadata = {
   title: "Thābit — Islamic emotional healing",
   description:
     "Thābit is a gentle Islamic emotional healing app from the team behind @deenteachings. Adhkar, a listening companion, and daily practices rooted in authentic sources — for the days when your heart feels heavy.",
+  icons: {
+    icon: [
+      { url: "/icon.png", media: "(prefers-color-scheme: light)" },
+      { url: "/icon-dark.png", media: "(prefers-color-scheme: dark)" },
+    ],
+  },
   openGraph: {
     title: "Thābit — Islamic emotional healing",
     description:
@@ -26,7 +32,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${amiri.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="relative flex min-h-full flex-col">
+        <div className="aurora" aria-hidden="true" />
+        <div className="relative z-10 flex min-h-screen flex-1 flex-col">
+          {children}
+        </div>
+        <div className="grain" aria-hidden="true" />
+      </body>
     </html>
   );
 }
