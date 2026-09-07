@@ -21,6 +21,13 @@ type Detected = {
 
 const COUNTRIES = ["us", "gb", "ae", "sa", "pk", "in", "ca", "au", "id", "tr", "fr", "es", "de", "my", "ng", "ma", "bd", "eg"];
 
+const LOCALES: [string, string][] = [
+  ["en", "English"], ["ar", "Arabic"], ["ur", "Urdu"], ["tr", "Turkish"],
+  ["fr", "French"], ["id", "Indonesian"], ["es", "Spanish"],
+  ["de", "German"], ["pt", "Portuguese"], ["ru", "Russian"],
+  ["bn", "Bengali"], ["ms", "Malay"],
+];
+
 const API = "/aso/api";
 
 export default function AsoForm({ samples }: { samples: Sample[] }) {
@@ -29,6 +36,7 @@ export default function AsoForm({ samples }: { samples: Sample[] }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [countries, setCountries] = useState<string[]>(["us"]);
+  const [locales, setLocales] = useState<string[]>(["en"]);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const runDetect = useCallback((input: string) => {
@@ -73,7 +81,7 @@ export default function AsoForm({ samples }: { samples: Sample[] }) {
     fetch(`${API}/analyze`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ detected: payload, countries }),
+      body: JSON.stringify({ detected: payload, countries, locales }),
     })
       .then((r) => r.json())
       .then((data: { job_id?: string }) => {
@@ -90,6 +98,16 @@ export default function AsoForm({ samples }: { samples: Sample[] }) {
 
   const toggleCountry = (code: string) => {
     setCountries((prev) =>
+      prev.includes(code)
+        ? prev.filter((c) => c !== code)
+        : prev.length < 5
+          ? [...prev, code]
+          : prev
+    );
+  };
+
+  const toggleLocale = (code: string) => {
+    setLocales((prev) =>
       prev.includes(code)
         ? prev.filter((c) => c !== code)
         : prev.length < 5
@@ -209,6 +227,27 @@ export default function AsoForm({ samples }: { samples: Sample[] }) {
       <p className="mt-2 text-[12px] text-tertiary">
         Every selected storefront is measured per term. More countries means a
         slower analysis — the storefronts are asked politely, one at a time.
+      </p>
+
+      <p className="section-label mt-8">Draft recommendations in</p>
+      <div className="mt-2 flex flex-wrap gap-2">
+        {LOCALES.map(([code, name]) => (
+          <button
+            key={code}
+            type="button"
+            className={`chip ${locales.includes(code) ? "chip-on" : ""}`}
+            aria-pressed={locales.includes(code)}
+            onClick={() => toggleLocale(code)}
+          >
+            {name}
+          </button>
+        ))}
+      </div>
+      <p className="mt-2 text-[12px] text-tertiary">
+        Keyword drafts are mined from each language&apos;s own storefront.
+        Prose is kept from your live localized listing where it exists, and
+        honestly marked TODO where it does not — we do not pretend to
+        translate.
       </p>
     </div>
   );
