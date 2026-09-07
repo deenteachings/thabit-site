@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
+        source: "/aso",
+        destination: `${ASO_HOST}/`,
+      },
+      {
         source: "/aso/:path*",
         destination: `${ASO_HOST}/:path*`,
       },
