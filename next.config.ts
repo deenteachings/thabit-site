@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+// The asokit engine host (Render). Set ASO_HOST in Vercel env and redeploy
+// after changing it — the value is baked in at build time.
 const ASO_HOST = process.env.ASO_HOST || "http://localhost:8017";
 
 const nextConfig: NextConfig = {
