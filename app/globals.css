@@ -239,6 +239,76 @@ body {
   background: var(--surface);
 }
 
+/* ---------- asokit landing (/aso) ---------- */
+
+.input-hero {
+  width: 100%;
+  height: 56px;
+  padding: 0 22px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--text-primary);
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  outline: none;
+}
+
+.input-hero:focus {
+  border-color: var(--border-strong);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.chip:hover {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
+.chip-on {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-text);
+}
+
+.chip-on:hover {
+  color: var(--primary-text);
+  opacity: 0.9;
+}
+
+.detect-box {
+  padding: 14px 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--elevated);
+  text-align: left;
+}
+
+.error-box {
+  padding: 14px 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: #d4574a;
+  font-size: 14px;
+  background: var(--elevated);
+  text-align: left;
+}
+
 /* ---------- Motion preferences ---------- */
 
 @media (prefers-reduced-motion: reduce) {

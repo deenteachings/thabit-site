@@ -6,11 +6,9 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: "/aso",
-        destination: `${ASO_HOST}/`,
-      },
-      {
-        source: "/aso/:path*",
+        // /aso itself is a real page (app/aso/page.tsx); everything under it
+        // that is not that page is served by the asokit engine.
+        source: "/aso/:path+",
         destination: `${ASO_HOST}/:path*`,
       },
     ];
