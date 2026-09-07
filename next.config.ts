@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
+const ASO_HOST = process.env.ASO_HOST || "http://localhost:8017";
+
 const nextConfig: NextConfig = {
-  /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: "/aso/:path*",
+        destination: `${ASO_HOST}/:path*`,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

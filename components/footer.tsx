@@ -22,6 +22,12 @@ export default function Footer() {
             @deenteachings
           </a>
           <a
+            href="/aso"
+            className="transition-colors hover:text-primary"
+          >
+            asokit — ASO audit
+          </a>
+          <a
             href={APP_STORE_URL}
             target="_blank"
             rel="noopener noreferrer"
