@@ -64,6 +64,12 @@ export default function AsoForm({ samples }: { samples: Sample[] }) {
 
   const startAnalysis = (payload: Record<string, unknown>) => {
     setBusy(true);
+    setError("");
+    const wake = setTimeout(() => {
+      setError(
+        "The engine is waking up (it sleeps when idle) — this first run can take up to a minute."
+      );
+    }, 5000);
     fetch(`${API}/analyze`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -71,6 +77,7 @@ export default function AsoForm({ samples }: { samples: Sample[] }) {
     })
       .then((r) => r.json())
       .then((data: { job_id?: string }) => {
+        clearTimeout(wake);
         if (data.job_id) {
           // The report page is served by the proxied engine, not a Next page.
           // eslint-disable-next-line @next/next/no-location-assign-relative-destination
