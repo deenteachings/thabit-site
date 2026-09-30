@@ -1,9 +1,8 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Sample = { label: string; value: string };
-
 type Detected = {
   kind: string;
   store?: string;
@@ -12,243 +11,453 @@ type Detected = {
   country?: string;
   name?: string;
   icon_url?: string;
-  ambiguity?: {
-    apple?: Record<string, unknown>;
-    play?: Record<string, unknown>;
-  };
+  ambiguity?: { apple?: Detected; play?: Detected };
   error?: { message?: string };
 };
-
-const COUNTRIES = ["us", "gb", "ae", "sa", "pk", "in", "ca", "au", "id", "tr", "fr", "es", "de", "my", "ng", "ma", "bd", "eg"];
-
-const LOCALES: [string, string][] = [
-  ["en", "English"], ["ar", "Arabic"], ["ur", "Urdu"], ["tr", "Turkish"],
-  ["fr", "French"], ["id", "Indonesian"], ["es", "Spanish"],
-  ["de", "German"], ["pt", "Portuguese"], ["ru", "Russian"],
-  ["bn", "Bengali"], ["ms", "Malay"],
+const COUNTRIES = [
+  ["us", "United States"],
+  ["gb", "United Kingdom"],
+  ["ae", "United Arab Emirates"],
+  ["sa", "Saudi Arabia"],
+  ["pk", "Pakistan"],
+  ["in", "India"],
+  ["ca", "Canada"],
+  ["au", "Australia"],
+  ["id", "Indonesia"],
+  ["tr", "Türkiye"],
+  ["fr", "France"],
+  ["es", "Spain"],
+  ["de", "Germany"],
+  ["my", "Malaysia"],
+  ["ng", "Nigeria"],
+  ["ma", "Morocco"],
+  ["bd", "Bangladesh"],
+  ["eg", "Egypt"],
 ];
+// The seven languages the Thābit app ships (thabit/i18n/index.ts), first.
+const THABIT_LOCALES = ["en", "ar", "ur", "id", "tr", "fr", "es"];
+const LOCALES = [
+  ["en", "English"],
+  ["ar", "Arabic · العربية"],
+  ["ur", "Urdu · اردو"],
+  ["id", "Indonesian"],
+  ["tr", "Turkish"],
+  ["fr", "French"],
+  ["es", "Spanish"],
+  ["de", "German"],
+  ["pt", "Portuguese"],
+  ["ru", "Russian"],
+  ["bn", "Bengali"],
+  ["ms", "Malay"],
+];
+const MAX_MARKETS = 5;
+const MAX_KEYWORDS = 20;
+const MAX_KEYWORD_CHARS = 60;
 
-const API = "/aso/api";
+// Split on commas (Latin and Arabic) and new lines; trim; drop duplicates.
+function parseKeywords(raw: string) {
+  const seen = new Set<string>();
+  return raw
+    .split(/[,،\n]/)
+    .map((term) => term.trim().replace(/\s+/g, " "))
+    .filter((term) => {
+      const key = term.toLocaleLowerCase();
+      if (!term || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+}
+const MAX_LOCALES = THABIT_LOCALES.length;
 
 export default function AsoForm({ samples }: { samples: Sample[] }) {
   const [value, setValue] = useState("");
   const [detected, setDetected] = useState<Detected | null>(null);
-  const [busy, setBusy] = useState(false);
+  const [phase, setPhase] = useState<"idle" | "detecting" | "starting">("idle");
   const [error, setError] = useState("");
-  const [countries, setCountries] = useState<string[]>(["us"]);
-  const [locales, setLocales] = useState<string[]>(["en"]);
+  const [notice, setNotice] = useState("");
+  const [countries, setCountries] = useState(["us"]);
+  const [locales, setLocales] = useState(["en"]);
+  const [keywords, setKeywords] = useState("");
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const controller = useRef<AbortController | null>(null);
+  const generation = useRef(0);
+  const starting = useRef(false);
+  const wake = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const runDetect = useCallback((input: string) => {
-    if (!input.trim()) {
-      setDetected(null);
-      setError("");
+  useEffect(
+    () => () => {
+      if (timer.current) clearTimeout(timer.current);
+      if (wake.current) clearTimeout(wake.current);
+      controller.current?.abort();
+    },
+    [],
+  );
+
+  async function detect(input: string, version: number) {
+    const request = new AbortController();
+    controller.current = request;
+    const timeout = setTimeout(() => request.abort(), 30000);
+    try {
+      const response = await fetch("/aso/api/detect", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ input }),
+        signal: request.signal,
+      });
+      const data: Detected = await response.json();
+      if (version !== generation.current) return;
+      if (!response.ok || data.error)
+        throw new Error(
+          data.error?.message ||
+            "We couldn’t identify that app. Check the link or ID and try again.",
+        );
+      if (!["apple", "play", "ambiguous"].includes(data.kind))
+        throw new Error(
+          "This app identifier isn’t supported. Try a full store link.",
+        );
+      setDetected(data);
+    } catch (err) {
+      if (version !== generation.current) return;
+      if (request.signal.aborted) {
+        setError("The app lookup took too long. Please retry in a moment.");
+        return;
+      }
+      setError(
+        err instanceof Error &&
+          !(err instanceof TypeError) &&
+          !(err instanceof SyntaxError)
+          ? err.message
+          : "The analysis engine is unavailable. Try again in a moment.",
+      );
+    } finally {
+      clearTimeout(timeout);
+      if (version === generation.current) setPhase("idle");
+    }
+  }
+
+  function change(input: string, immediate = false) {
+    if (starting.current) return;
+    setValue(input);
+    setDetected(null);
+    setError("");
+    setNotice("");
+    controller.current?.abort();
+    if (timer.current) clearTimeout(timer.current);
+    const version = ++generation.current;
+    setPhase(input.trim() ? "detecting" : "idle");
+    if (input.trim())
+      timer.current = setTimeout(
+        () => void detect(input.trim(), version),
+        immediate ? 0 : 500,
+      );
+  }
+
+  async function startAnalysis(payload: Detected) {
+    if (
+      starting.current ||
+      phase !== "idle" ||
+      !countries.length ||
+      !locales.length
+    )
+      return;
+    const seedTerms = parseKeywords(keywords);
+    if (seedTerms.length > MAX_KEYWORDS) {
+      setError(`Track up to ${MAX_KEYWORDS} keywords per audit.`);
       return;
     }
-    setBusy(true);
-    fetch(`${API}/detect`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ input }),
-    })
-      .then((r) => r.json())
-      .then((data: Detected) => {
-        setError("");
-        setDetected(data.error ? null : data);
-        if (data.error) setError(data.error.message || "Unrecognised input.");
-      })
-      .catch(() => {
-        setDetected(null);
-        setError("The analysis engine is offline right now — try again soon.");
-      })
-      .finally(() => setBusy(false));
-  }, []);
-
-  const onChange = (input: string) => {
-    setValue(input);
-    if (timer.current) clearTimeout(timer.current);
-    timer.current = setTimeout(() => runDetect(input), 600);
-  };
-
-  const startAnalysis = (payload: Record<string, unknown>) => {
-    setBusy(true);
-    setError("");
-    const wake = setTimeout(() => {
+    const tooLong = seedTerms.find((term) => term.length > MAX_KEYWORD_CHARS);
+    if (tooLong) {
       setError(
-        "The engine is waking up (it sleeps when idle) — this first run can take up to a minute."
+        `“${tooLong.slice(0, 24)}…” is longer than ${MAX_KEYWORD_CHARS} characters.`,
       );
-    }, 5000);
-    fetch(`${API}/analyze`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ detected: payload, countries, locales }),
-    })
-      .then((r) => r.json())
-      .then((data: { job_id?: string }) => {
-        clearTimeout(wake);
-        if (data.job_id) {
-          // The report page is served by the proxied engine, not a Next page.
-          // eslint-disable-next-line @next/next/no-location-assign-relative-destination
-          window.location.href = `/aso/report/${data.job_id}`;
-        } else setError("Could not start the analysis.");
-      })
-      .catch(() => setError("The analysis engine is offline right now — try again soon."))
-      .finally(() => setBusy(false));
-  };
-
-  const toggleCountry = (code: string) => {
-    setCountries((prev) =>
-      prev.includes(code)
-        ? prev.filter((c) => c !== code)
-        : prev.length < 5
-          ? [...prev, code]
-          : prev
+      return;
+    }
+    starting.current = true;
+    setPhase("starting");
+    setError("");
+    wake.current = setTimeout(
+      () =>
+        setNotice(
+          "The engine is warming up. Your first audit can take up to a minute.",
+        ),
+      5000,
     );
-  };
+    const request = new AbortController();
+    controller.current = request;
+    const timeout = setTimeout(() => request.abort(), 90000);
+    try {
+      const response = await fetch("/aso/api/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          detected: payload,
+          countries,
+          locales,
+          seed_terms: seedTerms,
+        }),
+        signal: request.signal,
+      });
+      const data = await response.json();
+      if (response.status === 429 || response.status === 422) {
+        // Busy engine, per-connection quota, or invalid input: the engine's
+        // own message says exactly what to do next.
+        setError(
+          data?.detail?.message ||
+            "Couldn’t start the audit. Please try again in a minute.",
+        );
+        return;
+      }
+      if (!response.ok || typeof data.job_id !== "string" || !data.job_id)
+        throw new Error("Couldn’t start the audit. Please try again.");
+      // Reports are engine-rendered HTML, so navigation must load a full document.
+      // eslint-disable-next-line @next/next/no-location-assign-relative-destination
+      window.location.assign(`/aso/report/${encodeURIComponent(data.job_id)}`);
+    } catch {
+      setError(
+        "Couldn’t start the audit. The engine may be unavailable. Please try again.",
+      );
+    } finally {
+      clearTimeout(timeout);
+      if (wake.current) clearTimeout(wake.current);
+      setNotice("");
+      setPhase("idle");
+      starting.current = false;
+    }
+  }
 
-  const toggleLocale = (code: string) => {
-    setLocales((prev) =>
-      prev.includes(code)
-        ? prev.filter((c) => c !== code)
-        : prev.length < 5
-          ? [...prev, code]
-          : prev
-    );
-  };
+  function toggle(
+    code: string,
+    selected: string[],
+    update: (value: string[]) => void,
+    max: number,
+  ) {
+    if (selected.includes(code)) {
+      if (selected.length > 1) update(selected.filter((item) => item !== code));
+    } else if (selected.length < max) update([...selected, code]);
+  }
 
-  const submit = () => {
-    if (!detected || detected.kind === "ambiguous") return;
-    startAnalysis(detected);
-  };
+  const allThabit =
+    locales.length === THABIT_LOCALES.length &&
+    THABIT_LOCALES.every((code) => locales.includes(code));
 
   return (
-    <div className="mt-8">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+    <form
+      className="aso-form"
+      onSubmit={(event) => {
+        event.preventDefault();
+        if (detected && detected.kind !== "ambiguous")
+          void startAnalysis(detected);
+      }}
+      aria-busy={phase === "starting"}
+    >
+      <label className="aso-input-label" htmlFor="app-link">
+        App link or identifier
+      </label>
+      <div className="aso-input-row">
+        <span className="aso-input-icon" aria-hidden="true">
+          ↗
+        </span>
         <input
-          className="input-hero"
+          id="app-link"
           type="text"
+          autoComplete="off"
           spellCheck={false}
-          placeholder="https://apps.apple.com/us/app/id…  ·  com.example.app  ·  play.google.com/store/apps/details?id=…"
-          aria-label="App Store or Google Play link, package name, or numeric id"
+          placeholder="Paste your App Store or Google Play link"
           value={value}
-          onChange={(e) => onChange(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              submit();
-            }
-          }}
+          disabled={phase === "starting"}
+          onChange={(event) => change(event.target.value)}
+          aria-describedby="app-link-help detection-status"
         />
         <button
-          className="btn-pill btn-solid w-full sm:w-auto"
-          type="button"
-          onClick={submit}
-          disabled={busy || !detected || detected.kind === "ambiguous"}
+          className="aso-button"
+          disabled={
+            phase !== "idle" || !detected || detected.kind === "ambiguous"
+          }
+          type="submit"
         >
-          {busy ? "Working…" : "Analyze"}
+          {phase === "starting"
+            ? "Starting audit…"
+            : phase === "detecting"
+              ? "Finding app…"
+              : "Audit my app"}
+          <span aria-hidden="true">↗</span>
         </button>
       </div>
-
-      <div className="mt-4 flex flex-wrap gap-2">
-        {samples.map((s) => (
+      <p id="app-link-help" className="aso-input-help">
+        Store links, package names, bundle IDs, and numeric App Store IDs.
+      </p>
+      <div className="aso-samples">
+        <span>Take it for a spin</span>
+        {samples.map((sample) => (
           <button
-            key={s.value}
             type="button"
-            className="chip"
-            onClick={() => {
-              setValue(s.value);
-              runDetect(s.value);
-            }}
+            disabled={phase === "starting"}
+            key={sample.value}
+            onClick={() => change(sample.value, true)}
           >
-            {s.label}
+            {sample.label} <span aria-hidden="true">↗</span>
           </button>
         ))}
       </div>
-
-      {detected?.kind === "ambiguous" && (
-        <div className="detect-box mt-4" role="group" aria-label="Choose a store">
-          <p className="section-label">This identifier exists on both stores</p>
-          <p className="mt-1 text-[13px] text-tertiary">{detected.display}</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {(["apple", "play"] as const).map((store) => {
-              const opt = detected.ambiguity?.[store] as Detected | undefined;
-              if (!opt) return null;
-              return (
-                <button
-                  key={store}
-                  type="button"
-                  className="btn-pill btn-outline h-10 px-5 text-[13px]"
-                  onClick={() => startAnalysis(opt)}
-                >
-                  {store === "apple" ? "App Store" : "Google Play"} — {opt.name || opt.id}
-                </button>
-              );
-            })}
+      <div id="detection-status" role="status" aria-live="polite">
+        {phase === "detecting" && (
+          <p className="aso-detection">Looking up your app’s public listing…</p>
+        )}
+        {detected && detected.kind !== "ambiguous" && (
+          <div className="aso-detection">
+            <span className="aso-detection-check" aria-hidden="true">
+              ✓
+            </span>
+            <div>
+              <strong>
+                {detected.name || detected.display || detected.id}
+              </strong>
+              <p>
+                {detected.store === "apple" ? "App Store" : "Google Play"} ·{" "}
+                {(detected.country || "us").toUpperCase()} · Ready to audit
+              </p>
+            </div>
           </div>
+        )}
+        {notice && <p className="aso-detection">{notice}</p>}
+      </div>
+      {detected?.kind === "ambiguous" && (
+        <fieldset className="aso-ambiguity">
+          <legend>This app exists on both stores. Choose one to audit.</legend>
+          {(["apple", "play"] as const).map((store) => {
+            const option = detected.ambiguity?.[store];
+            return option ? (
+              <button
+                className="aso-button secondary"
+                type="button"
+                key={store}
+                disabled={phase !== "idle"}
+                onClick={() => void startAnalysis(option)}
+              >
+                {store === "apple" ? "App Store" : "Google Play"} ·{" "}
+                {option.name || option.id} ↗
+              </button>
+            ) : null;
+          })}
+        </fieldset>
+      )}
+      {error && (
+        <div className="aso-error" role="alert">
+          <span>{error}</span>
+          {!detected && (
+            <button type="button" onClick={() => change(value, true)}>
+              Retry lookup ↗
+            </button>
+          )}
         </div>
       )}
-
-      {detected && detected.kind !== "ambiguous" && (
-        <div className="detect-box mt-4 flex items-center gap-3">
-          {detected.icon_url && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={detected.icon_url} alt="" className="h-11 w-11 rounded-[10px] border border-border bg-surface" />
-          )}
-          <div>
-            <p className="text-[15px] font-semibold text-primary">{detected.name || detected.display}</p>
-            <p className="text-[12px] text-tertiary">
-              {detected.store === "apple" ? "App Store" : "Google Play"} ·{" "}
-              {(detected.country || "us").toUpperCase()}
+      <details className="aso-settings">
+        <summary>
+          <span className="aso-settings-title">◎ Customize your audit</span>
+          <span className="aso-settings-summary">
+            {countries.length === 1
+              ? COUNTRIES.find(([code]) => code === countries[0])?.[1]
+              : `${countries.length} markets`}{" "}
+            ·{" "}
+            {locales.length === 1
+              ? LOCALES.find(([code]) => code === locales[0])?.[1]
+              : `${locales.length} languages`}
+            <span className="aso-settings-plus" aria-hidden="true">
+              +
+            </span>
+          </span>
+        </summary>
+        <div className="aso-settings-body">
+          <div className="aso-keywords">
+            <label htmlFor="aso-keywords">
+              Keywords to track <span>optional</span>
+            </label>
+            <p id="aso-keywords-help">
+              Comma-separated, in any language — e.g. dhikr, أذكار, doa harian.
+              Each is measured in every market. Leave empty and we derive them
+              from your listing.
+            </p>
+            <textarea
+              id="aso-keywords"
+              rows={2}
+              dir="auto"
+              value={keywords}
+              disabled={phase === "starting"}
+              aria-describedby="aso-keywords-help aso-keywords-count"
+              onChange={(event) => setKeywords(event.target.value)}
+            />
+            <p id="aso-keywords-count" className="aso-keywords-count">
+              {parseKeywords(keywords).length}/{MAX_KEYWORDS}
             </p>
           </div>
+          <fieldset disabled={phase === "starting"}>
+            <legend>
+              Markets <span>
+                {countries.length}/{MAX_MARKETS}
+              </span>
+            </legend>
+            <p>Select 1–5 storefronts. More markets take longer to measure.</p>
+            <div className="aso-options">
+              {COUNTRIES.map(([code, name]) => (
+                <button
+                  key={code}
+                  type="button"
+                  aria-pressed={countries.includes(code)}
+                  disabled={
+                    countries.includes(code)
+                      ? countries.length === 1
+                      : countries.length === MAX_MARKETS
+                  }
+                  onClick={() =>
+                    toggle(code, countries, setCountries, MAX_MARKETS)
+                  }
+                >
+                  {name}
+                </button>
+              ))}
+            </div>
+          </fieldset>
+          <fieldset disabled={phase === "starting"}>
+            <legend>
+              Recommendation languages <span>
+                {locales.length}/{MAX_LOCALES}
+              </span>
+            </legend>
+            <p>
+              Each language is mined in its own storefront and mapped to the
+              exact App Store Connect and Play Console slots to fill. Prose we
+              can’t verify publicly is flagged, never guessed.
+            </p>
+            <button
+              type="button"
+              className="aso-preset"
+              aria-pressed={allThabit}
+              onClick={() => setLocales(allThabit ? ["en"] : THABIT_LOCALES)}
+            >
+              {allThabit ? "✓ " : ""}All 7 Thābit languages
+            </button>
+            <div className="aso-options">
+              {LOCALES.map(([code, name]) => (
+                <button
+                  key={code}
+                  type="button"
+                  aria-pressed={locales.includes(code)}
+                  disabled={
+                    locales.includes(code)
+                      ? locales.length === 1
+                      : locales.length === MAX_LOCALES
+                  }
+                  onClick={() =>
+                    toggle(code, locales, setLocales, MAX_LOCALES)
+                  }
+                >
+                  {name}
+                </button>
+              ))}
+            </div>
+          </fieldset>
         </div>
-      )}
-
-      {error && (
-        <div className="error-box mt-4" role="alert">
-          {error}
-        </div>
-      )}
-
-      <p className="section-label mt-8">Measure rank in</p>
-      <div className="mt-2 flex flex-wrap gap-2">
-        {COUNTRIES.map((c) => (
-          <button
-            key={c}
-            type="button"
-            className={`chip ${countries.includes(c) ? "chip-on" : ""}`}
-            aria-pressed={countries.includes(c)}
-            onClick={() => toggleCountry(c)}
-          >
-            {c.toUpperCase()}
-          </button>
-        ))}
-      </div>
-      <p className="mt-2 text-[12px] text-tertiary">
-        Every selected storefront is measured per term. More countries means a
-        slower analysis — the storefronts are asked politely, one at a time.
-      </p>
-
-      <p className="section-label mt-8">Draft recommendations in</p>
-      <div className="mt-2 flex flex-wrap gap-2">
-        {LOCALES.map(([code, name]) => (
-          <button
-            key={code}
-            type="button"
-            className={`chip ${locales.includes(code) ? "chip-on" : ""}`}
-            aria-pressed={locales.includes(code)}
-            onClick={() => toggleLocale(code)}
-          >
-            {name}
-          </button>
-        ))}
-      </div>
-      <p className="mt-2 text-[12px] text-tertiary">
-        Keyword drafts are mined from each language&apos;s own storefront.
-        Prose is kept from your live localized listing where it exists, and
-        honestly marked TODO where it does not — we do not pretend to
-        translate.
-      </p>
-    </div>
+      </details>
+    </form>
   );
 }

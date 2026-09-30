@@ -1,88 +1,252 @@
+import Link from "next/link";
 import type { Metadata } from "next";
-import AsoForm from "@/app/aso/aso-form";
+import AsoForm from "./aso-form";
+import "./aso.css";
 
 export const metadata: Metadata = {
-  title: "asokit — paste a link, get a full ASO audit",
+  title: "asokit — a clearer path to app discovery",
   description:
-    "An honest ASO audit. Paste an App Store or Google Play link, a package name, or a numeric id — get a full report with measured rank, findings, keyword gaps and competitors. No invented volume figures.",
+    "Understand your store listing with a source-backed ASO audit. Measure search visibility, find keyword gaps, and see what to improve next.",
+  openGraph: {
+    title: "asokit — a clearer path to app discovery",
+    description: "Your listing. Your opportunities. A clearer next move.",
+    url: "/aso",
+    siteName: "asokit",
+  },
 };
 
 const SAMPLES = [
-  { label: "Thābit — App Store", value: "https://apps.apple.com/us/app/id6788482756" },
-  { label: "Thābit — Google Play", value: "https://play.google.com/store/apps/details?id=com.deenteachings.thabit" },
-  { label: "A cross-store bundle", value: "com.tinyspeck.chatlyio" },
+  {
+    label: "Thābit on iOS",
+    value: "https://apps.apple.com/us/app/id6788482756",
+  },
+  {
+    label: "Thābit on Android",
+    value:
+      "https://play.google.com/store/apps/details?id=com.deenteachings.thabit",
+  },
 ];
 
 export default function AsoPage() {
   return (
-    <main className="flex-1">
-      <section className="border-b border-border">
-        <div className="mx-auto max-w-6xl px-6 pb-14 pt-16 sm:pt-20">
-          <p className="section-label">ASO audit · no guesses</p>
-          <h1 className="display-huge mt-4 text-balance">
-            Paste a link, get a full ASO audit.
-          </h1>
-          <p className="mt-6 max-w-2xl text-[16px] leading-6 text-secondary">
-            An App Store link, a Google Play link, a package name, a bundle
-            id, or a bare numeric id. We detect which store and which app it
-            is — with zero guesswork — pull the live listing, and measure
-            everything a public page can honestly show.
-          </p>
-
+    <div className="aso-app">
+      <a className="aso-skip" href="#audit">
+        Skip to audit
+      </a>
+      <header className="aso-nav">
+        <a className="aso-brand" href="/aso" aria-label="asokit home">
+          <span className="aso-mark" aria-hidden="true">
+            a<span>↗</span>
+          </span>
+          asokit<span className="aso-brand-note">APP GROWTH, UNDERSTOOD</span>
+        </a>
+        <nav aria-label="ASO navigation">
+          <a href="#how">How it works</a>
+          <a href="/aso/methodology">Methodology</a>
+          <a className="aso-nav-action" href="/aso/watch">
+            Watchlist <span aria-hidden="true">↗</span>
+          </a>
+        </nav>
+      </header>
+      <main>
+        <section className="aso-hero aso-wrap">
+          <div className="aso-intro">
+            <p className="aso-eyebrow">
+              <span className="aso-dot" /> INDEPENDENT ASO INTELLIGENCE
+            </p>
+            <h1>
+              Good apps deserve
+              <br />
+              to be <em>discovered.</em>
+            </h1>
+            <p className="aso-lead">
+              See what’s holding your listing back.
+              <br className="aso-desktop-break" /> Turn public store data into
+              your next best move.
+            </p>
+            <div className="aso-promise">
+              <span>↗ App Store</span>
+              <span>▷ Google Play</span>
+              <span>No account needed</span>
+            </div>
+          </div>
+          <aside
+            className="aso-preview"
+            aria-label="Illustrative report preview"
+          >
+            <div className="aso-preview-head">
+              <span className="aso-eyebrow">YOUR LISTING, DECODED</span>
+              <span className="aso-example">ILLUSTRATIVE</span>
+            </div>
+            <div className="aso-preview-score">
+              <div className="aso-score-orbit">
+                <span>↗</span>
+              </div>
+              <div>
+                <h2>Clarity before changes.</h2>
+                <p>A score with the evidence behind it.</p>
+              </div>
+            </div>
+            <div className="aso-preview-row">
+              <span>
+                <i className="aso-status green" />
+                Listing health
+              </span>
+              <strong>Know what to fix</strong>
+            </div>
+            <div className="aso-preview-row">
+              <span>
+                <i className="aso-status amber" />
+                Search visibility
+              </span>
+              <strong>See where you stand</strong>
+            </div>
+            <div className="aso-preview-row">
+              <span>
+                <i className="aso-status purple" />
+                Keyword opportunities
+              </span>
+              <strong>Find the gaps</strong>
+            </div>
+            <div className="aso-preview-foot">
+              <span>✓ Sources attached</span>
+              <span>✓ Limitations labelled</span>
+            </div>
+          </aside>
+        </section>
+        <section
+          className="aso-wrap aso-audit-section"
+          id="audit"
+          aria-labelledby="audit-title"
+        >
+          <div className="aso-section-top">
+            <div>
+              <p className="aso-eyebrow">01 / START WITH YOUR APP</p>
+              <h2 id="audit-title">Your next chapter starts here.</h2>
+            </div>
+            <span className="aso-caption">
+              Public data. Practical direction.
+            </span>
+          </div>
           <AsoForm samples={SAMPLES} />
-
-          <p className="mt-6 text-[13px] text-tertiary">
-            Privacy: only public store pages are fetched. Nothing about your
-            private console data is needed — or asked for.
+          <p className="aso-privacy">
+            ◇ Only public store information. Your private console stays private.
           </p>
-        </div>
-      </section>
-
-      <section id="how" className="border-b border-border bg-surface">
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <p className="section-label">How it works</p>
-          <h2 className="display-large mt-3">Three honest steps.</h2>
-          <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-3">
+        </section>
+        <section className="aso-deliverables aso-wrap" id="report">
+          <div className="aso-section-top">
+            <div>
+              <p className="aso-eyebrow">THE BIGGER PICTURE</p>
+              <h2>Less guesswork. More direction.</h2>
+            </div>
+            <a className="aso-text-link" href="/aso/methodology">
+              Explore the methodology ↗
+            </a>
+          </div>
+          <div className="aso-feature-grid">
             {[
-              ["1 · detect", "Exact store and app detection — a link, an id, or a package name. If an identifier exists on both stores, we ask instead of guessing."],
-              ["2 · measure", "Live listing pulled with provenance, every field checked against the stores' published rules, and your real position in live search results."],
-              ["3 · report", "A shareable report: score, findings with sources, measured rank, keyword gaps, and competitors — each labelled with how it was measured."],
-            ].map(([label, body]) => (
-              <div key={label} className="bg-background p-6">
-                <p className="section-label">{label}</p>
-                <p className="mt-3 text-[14px] leading-relaxed text-secondary">{body}</p>
-              </div>
+              [
+                "01",
+                "Listing health",
+                "Understand the details that matter.",
+                "A rule-based scorecard with field-level findings, recommended fixes, and the source behind each rule.",
+                "↗",
+              ],
+              [
+                "02",
+                "Search visibility",
+                "Find your place in the results.",
+                "Measured positions across selected storefronts, competing listings, and keywords you may be missing.",
+                "◎",
+              ],
+              [
+                "03",
+                "Room to grow",
+                "Make your next move a better one.",
+                "Review language, localized listings, and track changes over time. See what is available and what is not.",
+                "✳",
+              ],
+            ].map(([number, label, title, body, icon]) => (
+              <article className="aso-feature" key={number}>
+                <div className="aso-feature-top">
+                  <span>
+                    {number} / {label}
+                  </span>
+                  <span className="aso-feature-icon" aria-hidden="true">
+                    {icon}
+                  </span>
+                </div>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </article>
             ))}
           </div>
-
-          <h2 className="display-large mt-14">What we never invent.</h2>
-          <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-secondary">
-            Search volume, difficulty scores, and rank predictions are
-            proprietary to Apple Search Ads and Google Keyword Planner. A tool
-            that prints them without your credentials is modelling a guess —
-            this tool reports what it can measure, and says plainly when a
-            source is unreachable.
-          </p>
-        </div>
-      </section>
-
-      <section className="border-b border-border">
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <p className="section-label">What the report contains</p>
-          <div className="mt-6 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-3">
-            {[
-              ["Score", "Every point traceable to a published rule, renormalised when fields a public page cannot show are excluded."],
-              ["Findings", "Severity, field, fix, and the source URL behind each rule."],
-              ["Rank & gaps", "Your measured position per term across storefronts, leader listings, autocomplete demand, and the words ranking apps use that you do not."],
-            ].map(([label, body]) => (
-              <div key={label} className="bg-background p-6">
-                <p className="text-[15px] font-semibold text-primary">{label}</p>
-                <p className="mt-2 text-[14px] leading-relaxed text-secondary">{body}</p>
+        </section>
+        <section className="aso-process" id="how">
+          <div className="aso-wrap">
+            <div className="aso-section-top">
+              <div>
+                <p className="aso-eyebrow">FROM LINK TO NEXT STEPS</p>
+                <h2>A little input. A lot of perspective.</h2>
               </div>
-            ))}
+            </div>
+            <div className="aso-steps">
+              {[
+                [
+                  "01",
+                  "Bring your app",
+                  "Paste a store link, package name, bundle ID, or numeric App Store ID. We resolve the listing and ask you to choose if it exists on both stores.",
+                ],
+                [
+                  "02",
+                  "Set your lens",
+                  "Choose your markets and recommendation languages. We inspect the public listing and measure live search results.",
+                ],
+                [
+                  "03",
+                  "Make your move",
+                  "Read your report, follow the evidence, and prioritize changes. Add the app to your watchlist to follow rank movement.",
+                ],
+              ].map(([n, title, body]) => (
+                <article key={n}>
+                  <span className="aso-step-number">{n}</span>
+                  <h3>{title}</h3>
+                  <p>{body}</p>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+        <section className="aso-honesty aso-wrap">
+          <span className="aso-honesty-symbol" aria-hidden="true">
+            ✳
+          </span>
+          <div>
+            <p className="aso-eyebrow">CONFIDENCE COMES FROM CONTEXT</p>
+            <h2>
+              If we can’t measure it,
+              <br />
+              we’ll say so.
+            </h2>
+            <p>
+              No invented search volumes. No unexplained difficulty scores.
+              Public data has limits; every report should make those limits
+              clear. A listing score is a diagnostic, not a promise of growth.
+            </p>
+            <a className="aso-text-link" href="/aso/methodology">
+              Read how we measure ↗
+            </a>
+          </div>
+        </section>
+      </main>
+      <footer className="aso-footer aso-wrap">
+        <a className="aso-brand" href="/aso">
+          asokit
+          <span className="aso-dot" />
+        </a>
+        <p>A clearer view. A better next move.</p>
+        <Link href="/">From the team behind Thābit ↗</Link>
+      </footer>
+    </div>
   );
 }
