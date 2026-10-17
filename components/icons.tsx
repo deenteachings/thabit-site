@@ -110,6 +110,75 @@ export function ChevronIcon({ className }: IconProps) {
   );
 }
 
+export function PlusIcon({ className }: IconProps) {
+  return (
+    <Svg className={className}>
+      <path d="M12 5v14M5 12h14" />
+    </Svg>
+  );
+}
+
+export function ArrowIcon({ className }: IconProps) {
+  return (
+    <Svg className={className}>
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </Svg>
+  );
+}
+
+export function MailIcon({ className }: IconProps) {
+  return (
+    <Svg className={className}>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3.5 6.5 8.5 6.5 8.5-6.5" />
+    </Svg>
+  );
+}
+
+export function CardIcon({ className }: IconProps) {
+  return (
+    <Svg className={className}>
+      <rect x="2.5" y="5" width="19" height="14" rx="2" />
+      <path d="M2.5 10h19M6.5 15h4" />
+    </Svg>
+  );
+}
+
+export function PersonIcon({ className }: IconProps) {
+  return (
+    <Svg className={className}>
+      <circle cx="12" cy="8" r="3.5" />
+      <path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5" />
+    </Svg>
+  );
+}
+
+export function ChatIcon({ className }: IconProps) {
+  return (
+    <Svg className={className}>
+      <path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12z" />
+    </Svg>
+  );
+}
+
+export function PhoneIcon({ className }: IconProps) {
+  return (
+    <Svg className={className}>
+      <rect x="6" y="2.5" width="12" height="19" rx="2.5" />
+      <path d="M10.5 18.5h3" />
+    </Svg>
+  );
+}
+
+export function ShieldIcon({ className }: IconProps) {
+  return (
+    <Svg className={className}>
+      <path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z" />
+      <path d="m9 12 2 2 4-4" />
+    </Svg>
+  );
+}
+
 export function AppleIcon({ className }: IconProps) {
   return (
     <svg

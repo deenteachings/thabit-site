@@ -43,6 +43,12 @@ export default function Footer() {
           >
             Google Play
           </a>
+          <a href="/support" className="transition-colors hover:text-primary">
+            Support
+          </a>
+          <a href="/privacy" className="transition-colors hover:text-primary">
+            Privacy
+          </a>
           <a
             href="mailto:thabit@deenteachings.com"
             className="transition-colors hover:text-primary"

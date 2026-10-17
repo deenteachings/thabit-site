@@ -1,0 +1,601 @@
+.thabit-home {
+  --background: #f9f7f1;
+  --surface: #eeede4;
+  --elevated: #fffdf7;
+  --pressed: #e7e9db;
+  --border: #dbdfd1;
+  --border-subtle: #e9eadf;
+  --border-strong: #344b3e;
+  --text-primary: #263e32;
+  --text-secondary: #667165;
+  --text-tertiary: #70786b;
+  --text-quaternary: #7c8376;
+  --primary: #263e32;
+  --primary-text: #fffdf6;
+  background: var(--background);
+  color: var(--text-primary);
+  color-scheme: light;
+  overflow: clip;
+}
+.thabit-home header {
+  background: #f9f7f1ed;
+  backdrop-filter: blur(16px);
+}
+.thabit-home header nav {
+  height: 84px;
+  max-width: 1240px;
+}
+.thabit-home header nav > a:first-child {
+  font-family: Georgia, serif;
+  font-size: 26px;
+  letter-spacing: -1px;
+  font-weight: 400;
+  gap: 10px;
+}
+.thabit-nav-symbol {
+  font-size: 32px;
+  color: #74855f;
+}
+.thabit-home header nav > a:last-child {
+  border-radius: 6px;
+  padding: 12px 23px;
+  font-size: 12px;
+}
+.thabit-hero-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 80px;
+  padding: 72px 30px 62px;
+  align-items: center;
+}
+.thabit-hero-copy .section-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 9px;
+  letter-spacing: 1.9px;
+}
+.thabit-small-sun {
+  font-size: 23px;
+  color: #7e8d6b;
+}
+.thabit-hero h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(60px, 6vw, 86px);
+  letter-spacing: -4px;
+  line-height: 1.03;
+  margin: 27px 0;
+}
+.thabit-hero h1 em {
+  color: #7d8a60;
+  font-weight: 400;
+}
+.thabit-salam {
+  font-size: 16px;
+  margin: 25px 0 15px;
+}
+.thabit-hero-description {
+  max-width: 410px;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--text-secondary);
+}
+.thabit-hero-badges {
+  margin-top: 31px;
+  gap: 12px;
+  justify-content: start;
+}
+.thabit-home .btn-pill {
+  border-radius: 7px;
+  height: 54px;
+  padding: 0 22px;
+}
+.thabit-hero-note {
+  font-size: 10px;
+  line-height: 1.8;
+  margin-top: 20px;
+  color: var(--text-tertiary);
+}
+.thabit-hero-art {
+  position: relative;
+  min-height: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.thabit-arch {
+  position: absolute;
+  inset: 0 10px 15px;
+  background: #e7e8d9;
+  border-radius: 230px 230px 14px 14px;
+  overflow: hidden;
+}
+.thabit-arch:before,
+.thabit-arch:after {
+  content: "";
+  position: absolute;
+  border: 1px solid #cdd3bd;
+  border-radius: 50%;
+  width: 480px;
+  height: 480px;
+  left: -95px;
+  bottom: -190px;
+}
+.thabit-arch:after {
+  left: 120px;
+  bottom: -110px;
+  width: 340px;
+  height: 340px;
+}
+.thabit-arch > span {
+  position: absolute;
+  top: 30px;
+  right: 35px;
+  font-size: 68px;
+  color: #c0c7ae;
+  transform: rotate(8deg);
+}
+.thabit-hero-device {
+  position: relative;
+  width: 225px;
+  transform: rotate(-5deg);
+  margin-top: 16px;
+}
+.thabit-home .device-frame {
+  border: 5px solid #e4e5d8;
+  padding: 2px;
+  border-radius: 33px;
+  background: #fff;
+  box-shadow: 0 20px 40px -18px #243c3240;
+}
+.thabit-home .device-screen {
+  border-radius: 25px;
+}
+.thabit-hero-caption {
+  position: absolute;
+  bottom: 76px;
+  right: -8px;
+  padding: 18px 23px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  border: 1px solid #e3e4d8;
+  border-radius: 9px;
+  background: #fffcf2;
+  box-shadow: 0 8px 30px -20px #263e3260;
+  font-size: 11px;
+  line-height: 1.7;
+  transform: rotate(3deg);
+}
+.thabit-hero-caption > span {
+  font-size: 28px;
+  color: #849467;
+}
+.thabit-hero-caption strong {
+  font-weight: 500;
+  color: #7a826f;
+}
+.thabit-art-note {
+  position: absolute;
+  bottom: -10px;
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  color: #7c846c;
+}
+.thabit-hero-bottom {
+  border-block: 1px solid var(--border);
+  padding: 24px 35px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+.thabit-hero-bottom a {
+  color: var(--primary);
+}
+.thabit-hero-bottom a span {
+  margin-left: 18px;
+}
+.thabit-home .display-large {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(34px, 3.8vw, 47px);
+  line-height: 1.16;
+  letter-spacing: -1.7px;
+}
+.thabit-home .section-label {
+  color: #788263;
+  font-size: 10px;
+}
+.thabit-quote {
+  border: 0;
+  background: #f1f0e7;
+  margin: 60px 30px 0;
+  border-radius: 10px;
+}
+.thabit-quote > div {
+  padding-block: 65px;
+  max-width: 760px;
+}
+.thabit-quote .arabic {
+  font-size: 25px;
+  line-height: 1.9;
+}
+.thabit-quote p.italic {
+  font-family: Georgia, serif;
+  font-size: 19px;
+  line-height: 1.65;
+}
+.thabit-home #practices > div {
+  max-width: 1200px;
+}
+.thabit-home #practices .grid {
+  gap: 12px;
+  border: 0;
+}
+.thabit-home #practices .grid > div {
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: #f4f3eb;
+  align-items: flex-start;
+  text-align: left;
+  padding: 26px;
+  gap: 11px;
+}
+.thabit-home #practices .grid > div:nth-child(3n + 2) {
+  background: #eef0e5;
+}
+.thabit-home #practices .grid > div svg {
+  width: 27px;
+  height: 27px;
+  color: #819066;
+  margin-bottom: 10px;
+}
+.thabit-home #practices .grid > div h3 {
+  font-family: Georgia, serif;
+  font-size: 23px;
+  font-weight: 400;
+}
+.thabit-spotlight > div {
+  max-width: 1200px;
+  gap: 100px;
+}
+.thabit-spotlight h2 {
+  max-width: 460px;
+}
+.thabit-spotlight p:not(.section-label) {
+  font-size: 15px;
+  line-height: 1.9;
+  max-width: 410px;
+}
+.thabit-spotlight > div > div:has(.device-frame) {
+  background: #e8ebde;
+  border-radius: 190px 190px 14px 14px;
+  padding: 40px 18px;
+  min-height: 500px;
+  align-items: center;
+  gap: 18px;
+}
+.thabit-spotlight .device-frame.w-56 {
+  max-width: 215px;
+}
+.thabit-spotlight .device-frame.w-36 {
+  max-width: 175px;
+  width: 45%;
+}
+.thabit-home #screens {
+  background: #eaede1;
+}
+.thabit-home #screens figure {
+  align-items: start;
+  text-align: left;
+}
+.thabit-home #screens .device-frame {
+  max-width: 100%;
+}
+.thabit-home #screens figcaption {
+  padding: 6px;
+}
+.thabit-home #screens figcaption p:first-child {
+  font-family: Georgia, serif;
+  font-size: 21px;
+  font-weight: 400;
+}
+.thabit-home dl {
+  max-width: 1200px;
+  padding-block: 50px;
+}
+.thabit-home dl > div {
+  border-left: 1px solid var(--border);
+  padding-left: 28px;
+}
+.thabit-home dl dd {
+  font-family: Georgia, serif;
+  font-size: 42px;
+  font-weight: 400;
+}
+.thabit-home #about {
+  background: #f3f0e7;
+}
+.thabit-home #about > div {
+  padding-block: 75px;
+}
+.thabit-home #about .arabic.mb-6 {
+  font-size: 34px;
+  font-weight: 400;
+}
+.thabit-home #about p.text-balance {
+  font-size: 15px;
+  line-height: 1.95;
+}
+.thabit-home #download {
+  margin: 36px;
+  border-radius: 12px;
+  background: #263e32;
+  --primary: #f4f5e8;
+  --primary-text: #263e32;
+  --text-primary: #f4f5e8;
+  --text-secondary: #d0d7c5;
+  --text-tertiary: #b5c2a4;
+  --border: #5c6d56;
+  color: #f4f5e8;
+}
+.thabit-home #download .display-medium {
+  font:
+    400 clamp(35px, 5vw, 56px) / 1.1 Georgia,
+    serif;
+  letter-spacing: -1.6px;
+}
+.thabit-home #download .section-label {
+  color: #c1cfae;
+}
+.thabit-home #download > div {
+  padding-block: 75px;
+}
+.thabit-home footer > div {
+  align-items: start;
+  max-width: 1200px;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+.thabit-home footer nav {
+  gap: 20px;
+  font-size: 11px;
+}
+.thabit-home footer img[src*="logo-white"] {
+  display: none;
+}
+.thabit-home footer img[src*="logo-black"] {
+  display: block;
+  opacity: 0.7;
+}
+.thabit-home :focus-visible {
+  outline-color: #8fa467;
+}
+.thabit-home section[id] {
+  scroll-margin-top: 100px;
+}
+@media (max-width: 950px) {
+  .thabit-hero-inner {
+    gap: 25px;
+    padding-top: 45px;
+  }
+  .thabit-hero h1 {
+    font-size: 64px;
+    letter-spacing: -3px;
+  }
+  .thabit-hero-art {
+    min-height: 480px;
+  }
+  .thabit-hero-device {
+    width: 190px;
+  }
+  .thabit-hero-caption {
+    right: 0;
+    font-size: 10px;
+    padding: 14px;
+    bottom: 60px;
+  }
+  .thabit-hero-badges {
+    flex-wrap: wrap;
+  }
+  .thabit-spotlight > div {
+    gap: 45px;
+  }
+  .thabit-spotlight > div > div:has(.device-frame) {
+    max-width: 500px;
+    width: 100%;
+    justify-self: center;
+  }
+  .thabit-home #screens figure {
+    align-items: center;
+  }
+}
+@media (max-width: 640px) {
+  .thabit-home header nav {
+    height: 72px;
+    padding-inline: 22px;
+  }
+  .thabit-home header nav > a:last-child {
+    padding: 10px 17px;
+  }
+  .thabit-hero-inner {
+    grid-template-columns: 1fr;
+    padding: 35px 24px 40px;
+    gap: 35px;
+  }
+  .thabit-hero h1 {
+    font-size: 65px;
+    line-height: 1.04;
+    letter-spacing: -3px;
+    margin-top: 20px;
+  }
+  .thabit-hero-copy .section-label {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  .thabit-salam {
+    font-size: 14px;
+  }
+  .thabit-hero-description {
+    font-size: 14px;
+  }
+  .thabit-hero-badges {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+  .thabit-home .btn-pill {
+    padding: 0 15px;
+  }
+  .thabit-hero-badges .btn-pill {
+    flex: 1;
+  }
+  .thabit-hero-badges .btn-pill span span:last-child {
+    font-size: 13px;
+  }
+  .thabit-hero-badges .btn-pill span span:first-child {
+    font-size: 8px;
+  }
+  .thabit-hero-art {
+    min-height: 470px;
+    max-width: 380px;
+    width: 100%;
+    margin: auto;
+  }
+  .thabit-hero-device {
+    width: 191px;
+  }
+  .thabit-hero-caption {
+    bottom: 65px;
+    right: 0;
+  }
+  .thabit-hero-bottom {
+    padding: 20px 24px;
+    justify-content: center;
+  }
+  .thabit-hero-bottom > span {
+    display: none;
+  }
+  .thabit-quote {
+    margin: 28px 16px 0;
+  }
+  .thabit-quote > div {
+    padding: 40px 22px;
+  }
+  .thabit-quote .arabic {
+    font-size: 22px;
+  }
+  .thabit-quote p.italic {
+    font-size: 17px;
+  }
+  .thabit-home #practices > div {
+    padding-block: 55px;
+  }
+  .thabit-home #practices .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .thabit-home #practices .grid > div {
+    padding: 20px 17px;
+  }
+  .thabit-home #practices .grid > div:last-child {
+    grid-column: 1/-1;
+  }
+  .thabit-home #practices .grid > div h3 {
+    font-size: 21px;
+  }
+  .thabit-home #practices .grid > div p {
+    font-size: 10px;
+  }
+  .thabit-home .display-large {
+    font-size: 35px;
+  }
+  .thabit-home .mb-14 {
+    margin-bottom: 30px;
+  }
+  .thabit-spotlight > div {
+    padding-block: 50px;
+    gap: 32px;
+  }
+  .thabit-spotlight > div > div:has(.device-frame) {
+    min-height: 390px;
+    padding: 30px 18px;
+  }
+  .thabit-spotlight .device-frame.w-56 {
+    max-width: 178px;
+  }
+  .thabit-spotlight .device-frame.w-36 {
+    max-width: 145px;
+  }
+  .thabit-home #screens > div {
+    padding-block: 50px;
+  }
+  .thabit-home #screens .grid {
+    gap: 27px 17px;
+  }
+  .thabit-home #screens figcaption p:first-child {
+    font-size: 19px;
+  }
+  .thabit-home #screens figcaption p:last-child {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .thabit-home dl {
+    gap: 26px;
+    padding-block: 35px;
+  }
+  .thabit-home dl dd {
+    font-size: 32px;
+  }
+  .thabit-home dl dt {
+    font-size: 9px;
+  }
+  .thabit-home #about > div {
+    padding-block: 50px;
+  }
+  .thabit-home #download {
+    margin: 20px 14px;
+  }
+  .thabit-home #download > div {
+    padding: 45px 20px;
+  }
+  .thabit-home #download .btn-pill {
+    width: 190px;
+  }
+  .thabit-home #download p {
+    font-size: 14px;
+  }
+  .thabit-home footer > div {
+    align-items: center;
+  }
+  .thabit-home footer nav {
+    font-size: 11px;
+  }
+  .thabit-home footer p {
+    font-size: 10px;
+  }
+}
+
+.thabit-home dl dd {
+  font-size: 29px;
+}
+.thabit-home #practices .grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 640px) {
+  .thabit-home #practices .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .thabit-home #practices .grid > div:last-child {
+    grid-column: auto;
+  }
+  .thabit-home dl dd {
+    font-size: 24px;
+  }
+}
