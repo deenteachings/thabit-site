@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://thabitapp.com"),
   title: "Thābit — Islamic emotional healing",
   description:
-    "Thābit is a gentle Islamic emotional healing app from the team behind @deenteachings. Adhkar, a listening companion, and daily practices rooted in authentic sources — for the days when your heart feels heavy.",
+    "Thābit is a gentle Islamic emotional healing app from the team behind @thethabitapp. Adhkar, a listening companion, and daily practices rooted in authentic sources — for the days when your heart feels heavy.",
   icons: {
     icon: [
       { url: "/icon.png", media: "(prefers-color-scheme: light)" },

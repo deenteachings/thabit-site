@@ -16,12 +16,12 @@ export default function Download() {
         <p className="mt-12 text-[13px] text-tertiary">
           From the team behind{" "}
           <a
-            href="https://instagram.com/deenteachings"
+            href="https://instagram.com/thethabitapp"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-secondary underline decoration-border underline-offset-4 transition-colors hover:text-primary"
           >
-            @deenteachings
+            @thethabitapp
           </a>
           . Made with intention. Sahih sources only.
         </p>

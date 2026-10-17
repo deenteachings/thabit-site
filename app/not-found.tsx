@@ -7,14 +7,11 @@ export default function NotFound() {
       <p className="section-label">404 / A little off the path</p>
       <h1 className="display-large mt-6 max-w-xl">Let’s find your way back.</h1>
       <p className="mt-5 max-w-md text-sm leading-7 text-secondary">
-        This page isn’t here. You can return to Thābit or start a new app audit.
+        This page isn’t here. You can return to Thābit.
       </p>
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <Link className="btn-pill btn-solid" href="/">
           Back to Thābit
-        </Link>
-        <Link className="btn-pill btn-outline" href="/aso">
-          Open asokit ↗
         </Link>
       </div>
     </main>
