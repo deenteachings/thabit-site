@@ -14,18 +14,12 @@ export default function Footer() {
           className="flex flex-wrap items-center justify-center gap-6 text-[13px] font-medium text-secondary"
         >
           <a
-            href="https://instagram.com/deenteachings"
+            href="https://instagram.com/thethabitapp"
             target="_blank"
             rel="noopener noreferrer"
             className="transition-colors hover:text-primary"
           >
-            @deenteachings
-          </a>
-          <a
-            href="/aso"
-            className="transition-colors hover:text-primary"
-          >
-            asokit — ASO audit
+            @thethabitapp
           </a>
           <a
             href={APP_STORE_URL}

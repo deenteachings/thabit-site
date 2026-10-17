@@ -361,8 +361,8 @@ export default function PrivacyPage() {
             </ul>
             <p>
               You can also email{" "}
-              <a href="mailto:salaam@deenteachings.com">
-                <strong>salaam@deenteachings.com</strong>
+              <a href="mailto:thabit@deenteachings.com">
+                <strong>thabit@deenteachings.com</strong>
               </a>{" "}
               to ask for a copy of the data our server holds, to have the
               analytics events linked to your account deleted, or about
@@ -379,8 +379,8 @@ export default function PrivacyPage() {
               Thābit is for people aged 13 and over. It is not directed at
               children under 13, and we do not knowingly collect data from
               them. If you believe a child under 13 has an account, email{" "}
-              <a href="mailto:salaam@deenteachings.com">
-                <strong>salaam@deenteachings.com</strong>
+              <a href="mailto:thabit@deenteachings.com">
+                <strong>thabit@deenteachings.com</strong>
               </a>{" "}
               and we will delete it.
             </p>
@@ -419,8 +419,8 @@ export default function PrivacyPage() {
               <div>
                 <dt>Email:</dt>
                 <dd>
-                  <a href="mailto:salaam@deenteachings.com">
-                    salaam@deenteachings.com
+                  <a href="mailto:thabit@deenteachings.com">
+                    thabit@deenteachings.com
                   </a>
                 </dd>
               </div>
@@ -428,11 +428,11 @@ export default function PrivacyPage() {
                 <dt>Instagram:</dt>
                 <dd>
                   <a
-                    href="https://instagram.com/deenteachings"
+                    href="https://instagram.com/thethabitapp"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    @deenteachings
+                    @thethabitapp
                   </a>
                 </dd>
               </div>

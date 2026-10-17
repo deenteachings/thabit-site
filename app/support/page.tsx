@@ -157,8 +157,8 @@ const GROUPS = [
             authenticity of every narration extremely seriously. Please email
             us the details (the exact wording and where you saw it) and we will
             investigate immediately and issue a fix. Email:{" "}
-            <a href="mailto:salaam@deenteachings.com">
-              <strong>salaam@deenteachings.com</strong>
+            <a href="mailto:thabit@deenteachings.com">
+              <strong>thabit@deenteachings.com</strong>
             </a>
           </p>
         ),
@@ -272,21 +272,21 @@ export default function SupportPage() {
           </p>
           <h2 id="contact-title">I have another question.</h2>
           <p>
-            Email us at salaam@deenteachings.com. We respond within 24 hours,
+            Email us at thabit@deenteachings.com. We respond within 24 hours,
             usually sooner. We&apos;d love to hear from you.
           </p>
           <div className="contact-actions">
-            <a href="mailto:salaam@deenteachings.com" className="contact-primary">
+            <a href="mailto:thabit@deenteachings.com" className="contact-primary">
               <MailIcon />
-              salaam@deenteachings.com
+              thabit@deenteachings.com
             </a>
             <a
-              href="https://instagram.com/deenteachings"
+              href="https://instagram.com/thethabitapp"
               target="_blank"
               rel="noopener noreferrer"
               className="contact-secondary"
             >
-              Instagram: @deenteachings
+              Instagram: @thethabitapp
             </a>
           </div>
         </div>

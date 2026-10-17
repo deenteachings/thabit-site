@@ -392,8 +392,8 @@ export default function TermsPage() {
               <div>
                 <dt>Email:</dt>
                 <dd>
-                  <a href="mailto:salaam@deenteachings.com">
-                    salaam@deenteachings.com
+                  <a href="mailto:thabit@deenteachings.com">
+                    thabit@deenteachings.com
                   </a>
                 </dd>
               </div>
@@ -401,11 +401,11 @@ export default function TermsPage() {
                 <dt>Instagram:</dt>
                 <dd>
                   <a
-                    href="https://instagram.com/deenteachings"
+                    href="https://instagram.com/thethabitapp"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    @deenteachings
+                    @thethabitapp
                   </a>
                 </dd>
               </div>
