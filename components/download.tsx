@@ -6,10 +6,10 @@ export default function Download() {
       <div className="mx-auto flex max-w-4xl flex-col items-center px-6 py-24 text-center sm:py-32">
         <p className="section-label mb-6">Get Thābit</p>
         <h2 className="display-medium text-balance">
-          Free. Quiet. Yours.
+          Your next quiet moment.
         </h2>
         <p className="mt-6 max-w-xl text-balance text-[16px] leading-6 text-secondary">
-          Download from the App Store or Google Play — and may it bring you the
+          Begin on the App Store or Google Play. May it bring you the
           stillness your heart has been asking for.
         </p>
         <StoreBadges className="mt-10" />

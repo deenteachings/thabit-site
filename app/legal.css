@@ -1,15 +1,15 @@
-/* /support and /privacy. Lives inside .thabit-home, so every colour below is
-   taken from the home page palette (home.css). */
+/* /support, /privacy and /terms. Every colour is a palette token from
+   globals.css (light and dark), aliased here by role. */
 
 .thabit-legal {
-  --sage: #74855f;
-  --sage-ink: #56633f; /* sage dark enough for small text on cream (AA) */
-  --arch: #e7e8d9;
-  --arch-line: #cdd3bd;
-  --card: #fffdf7;
-  --wash: #f4f3eb;
-  --wash-alt: #eef0e5;
-  --forest: #263e32;
+  --sage: var(--mark);
+  --sage-ink: var(--accent);
+  --arch: var(--surface-2);
+  --arch-line: color-mix(in oklab, var(--mark) 26%, transparent);
+  --card: var(--page);
+  --wash: var(--surface);
+  --wash-alt: var(--surface-2);
+  --forest: var(--accent);
 }
 
 .thabit-legal section[id],
@@ -73,9 +73,10 @@
   color: var(--sage-ink);
 }
 
-.legal-eyebrow > span {
-  font-size: 22px;
-  letter-spacing: 0;
+.legal-eyebrow > svg {
+  width: 18px;
+  height: auto;
+  flex: none;
   color: var(--sage);
 }
 
@@ -90,7 +91,7 @@
 }
 
 .legal-hero h1 em {
-  color: #7d8a60;
+  color: var(--accent-display);
   font-weight: 400;
 }
 
@@ -177,7 +178,7 @@
   left: 50%;
   font-size: 58px;
   line-height: 1;
-  color: #c0c7ae;
+  color: color-mix(in oklab, var(--mark) 30%, transparent);
   transform: translateX(-50%);
   pointer-events: none;
 }
@@ -187,10 +188,10 @@
   z-index: 1;
   width: 100%;
   padding: 22px 22px 10px;
-  border: 1px solid #e3e4d8;
+  border: 1px solid var(--border);
   border-radius: 10px;
-  background: #fffcf2;
-  box-shadow: 0 18px 40px -26px #263e3270;
+  background: var(--page);
+  box-shadow: 0 18px 40px -26px color-mix(in oklab, var(--pine-deep) 45%, transparent);
 }
 
 .legal-arch-card > p {
@@ -309,7 +310,7 @@
 
 .faq[open] {
   background: var(--card);
-  border-color: #c9cfbb;
+  border-color: color-mix(in oklab, var(--mark) 40%, var(--page));
 }
 
 .faq summary {
@@ -350,9 +351,9 @@
 
 .faq[open] summary svg {
   transform: rotate(45deg);
-  background: var(--forest);
-  border-color: var(--forest);
-  color: #f4f5e8;
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-text);
 }
 
 .faq-body {
@@ -442,7 +443,7 @@
 .faq-body a {
   color: var(--text-primary);
   text-decoration: underline;
-  text-decoration-color: #b7bfa5;
+  text-decoration-color: color-mix(in oklab, var(--mark) 50%, transparent);
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
   transition: text-decoration-color 0.15s ease;
@@ -467,7 +468,7 @@
   margin: 8px 0 64px 356px; /* lines up with the FAQ answers column */
   padding: 40px 44px;
   border-radius: 10px;
-  background: #f1f0e7;
+  background: var(--surface);
 }
 
 .care-callout > svg {
@@ -500,15 +501,15 @@
   overflow: hidden;
   margin: 0 36px 36px;
   border-radius: 12px;
-  background: var(--forest);
-  color: #f4f5e8;
+  background: var(--band);
+  color: var(--on-band);
 }
 
 .contact-band::before,
 .contact-band::after {
   content: "";
   position: absolute;
-  border: 1px solid #ffffff1c;
+  border: 1px solid var(--band-line);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -537,11 +538,11 @@
 
 .contact-band .legal-eyebrow {
   justify-content: center;
-  color: #c1cfae;
+  color: var(--on-band-2);
 }
 
-.contact-band .legal-eyebrow > span {
-  color: #c1cfae;
+.contact-band .legal-eyebrow > svg {
+  color: var(--band-mark);
 }
 
 .contact-band h2 {
@@ -559,7 +560,7 @@
   margin: 0 auto;
   font-size: 15px;
   line-height: 1.85;
-  color: #d0d7c5;
+  color: var(--on-band-2);
 }
 
 .contact-actions {
@@ -592,8 +593,8 @@
 }
 
 .contact-primary {
-  background: #f4f5e8;
-  color: var(--forest);
+  background: var(--on-band);
+  color: var(--pine-deep);
 }
 
 .contact-primary:hover {
@@ -601,12 +602,16 @@
 }
 
 .contact-secondary {
-  border: 1px solid #5c6d56;
-  color: #f4f5e8;
+  border: 1px solid var(--band-line);
+  color: var(--on-band);
 }
 
 .contact-secondary:hover {
-  border-color: #c1cfae;
+  border-color: var(--on-band-2);
+}
+
+.contact-band :focus-visible {
+  outline-color: var(--on-band);
 }
 
 /* ---------- Privacy: contents rail + document ---------- */
@@ -794,7 +799,7 @@
   margin: 80px 0 40px;
   padding: 56px 24px;
   border-radius: 10px;
-  background: #f3f0e7;
+  background: var(--surface);
   text-align: center;
 }
 
@@ -812,6 +817,38 @@
   font-size: 18px;
   line-height: 1.7;
   color: var(--text-primary);
+}
+
+/* ---------- Terms ---------- */
+
+.legal-prose ul.terms-not {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.legal-prose ul.terms-not li {
+  margin: 0;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--sage);
+  border-radius: 8px;
+  background: var(--wash);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.legal-prose ul.terms-not li::before {
+  display: none;
+}
+
+.legal-prose ul.terms-not + p {
+  margin-top: 18px;
+}
+
+.terms-url {
+  overflow-wrap: anywhere;
 }
 
 /* ---------- Motion ---------- */
@@ -1068,5 +1105,9 @@
   .policy-memorial {
     margin-top: 56px;
     padding: 40px 20px;
+  }
+
+  .legal-prose ul.terms-not {
+    grid-template-columns: 1fr;
   }
 }

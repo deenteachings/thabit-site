@@ -1,38 +1,85 @@
 @import "tailwindcss";
 
+/* ---------- Palette ----------
+   The brand palette, exactly as specified. Everything below derives from
+   these values (color-mix) so no other hues enter the site. */
+
 :root {
-  --background: #ffffff;
-  --surface: #f5f5f5;
-  --elevated: #ffffff;
-  --pressed: #ececec;
-  --border: #e4e4e4;
-  --border-subtle: #eeeeee;
-  --border-strong: #000000;
-  --text-primary: #000000;
-  --text-secondary: #555555;
-  --text-tertiary: #8a8a8a;
-  --text-quaternary: #b4b4b4;
-  --primary: #000000;
-  --primary-text: #ffffff;
-  --error: #d4574a;
-  --success: #2a7a4e;
+  --pine-deep: #0E3A2A;
+  --pine-mid:  #245C42;
+  --pine-lit:  #2F7D5B;
+  --mint:      #38A880;
+
+  --page:  #F4F4F1;
+  --ink:   #0C0C09;
+  --ink-2: #6B6B63;
+  --hair:  #7A7A73;
+  --error:   #AA463B;
+  --success: #246842;
+
+  /* Text on a mint fill. This is the light-mode ink, held constant so it
+     stays dark when --ink flips in dark mode (6.6:1 on mint). */
+  --on-mint: #0C0C09;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page:  #111110;
+    --ink:   #F4F4F1;
+    --ink-2: #C4C4BC;
+    --error:   #E8726A;
+    --success: #5BBF85;
+  }
+}
+
+/* ---------- Semantic tokens ----------
+   Contrast on --page (WCAG): ink 17.8, ink-2 4.9, pine-mid 7.1, pine-lit 4.5
+   (large text only), mint 2.7 (decoration only). In dark mode the pines fall
+   below 2.5, so accents switch to mint (6.4). */
+
+:root {
+  --background: var(--page);
+  --surface: color-mix(in oklab, var(--pine-mid) 7%, var(--page));
+  --surface-2: color-mix(in oklab, var(--pine-mid) 12%, var(--page));
+  --elevated: var(--page);
+  --pressed: color-mix(in oklab, var(--pine-mid) 12%, var(--page));
+  --border: color-mix(in oklab, var(--hair) 30%, var(--page));
+  --border-subtle: color-mix(in oklab, var(--hair) 16%, var(--page));
+  --border-strong: var(--ink);
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-2);
+  --text-tertiary: var(--ink-2);
+  --text-quaternary: var(--hair);
+  --primary: var(--pine-deep);
+  --primary-text: var(--page);
+  --accent: var(--pine-mid);         /* accent text at any size */
+  --accent-display: var(--pine-lit); /* accent in large display type */
+  --mark: var(--pine-lit);           /* icons, glyphs, rules */
+  --ring: color-mix(in oklab, var(--pine-mid) 22%, var(--page));
+
+  /* The deep pine band (download, contact). */
+  --band: var(--pine-deep);
+  --on-band: var(--page);
+  --on-band-2: color-mix(in oklab, var(--page) 74%, var(--pine-deep));
+  --band-line: color-mix(in oklab, var(--page) 18%, var(--pine-deep));
+  --band-mark: var(--mint);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #000000;
-    --surface: #141414;
-    --elevated: #1c1c1c;
-    --pressed: #242424;
-    --border: #2a2a2a;
-    --border-subtle: #1f1f1f;
-    --border-strong: #ffffff;
-    --text-primary: #ffffff;
-    --text-secondary: #9e9e9e;
-    --text-tertiary: #6e6e6e;
-    --text-quaternary: #4c4c4c;
-    --primary: #ffffff;
-    --primary-text: #000000;
+    --surface: color-mix(in oklab, var(--pine-mid) 14%, var(--page));
+    --surface-2: color-mix(in oklab, var(--pine-mid) 22%, var(--page));
+    --pressed: color-mix(in oklab, var(--pine-mid) 22%, var(--page));
+    --border: color-mix(in oklab, var(--hair) 34%, var(--page));
+    --border-subtle: color-mix(in oklab, var(--hair) 20%, var(--page));
+    --primary: var(--mint);
+    --primary-text: var(--on-mint);
+    --accent: var(--mint);
+    --accent-display: var(--mint);
+    --mark: var(--mint);
+    --ring: color-mix(in oklab, var(--pine-mid) 45%, var(--page));
+    --on-band: var(--ink);
+    --on-band-2: color-mix(in oklab, var(--ink) 74%, var(--pine-deep));
+    --band-line: color-mix(in oklab, var(--ink) 16%, var(--pine-deep));
   }
 }
 
@@ -44,11 +91,16 @@
   --color-border: var(--border);
   --color-border-subtle: var(--border-subtle);
   --color-border-strong: var(--border-strong);
-  --color-primary: var(--primary);
-  --color-primary-text: var(--primary-text);
+  /* text-primary is text (ink). Filled buttons use bg-action/text-action-text,
+     which are pine-deep in light mode and mint in dark. */
+  --color-primary: var(--text-primary);
+  --color-action: var(--primary);
+  --color-action-text: var(--primary-text);
   --color-secondary: var(--text-secondary);
   --color-tertiary: var(--text-tertiary);
   --color-quaternary: var(--text-quaternary);
+  --color-accent: var(--accent);
+  --color-mark: var(--mark);
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display",
     "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-arabic: var(--font-amiri), "Amiri", Georgia, serif;
@@ -68,46 +120,13 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* ---------- Aurora page background ---------- */
+/* ---------- Page background ---------- */
 
-@media (prefers-color-scheme: light) {
-  body {
-    background: linear-gradient(
-      to top,
-      #ffffff 0%,
-      #fcfcfc 45%,
-      #f2f2f2 100%
-    );
-  }
-
-  .aurora {
-    background:
-      radial-gradient(60% 50% at 50% -10%, rgba(0, 0, 0, 0.05), transparent 70%),
-      radial-gradient(45% 40% at 105% 32%, rgba(0, 0, 0, 0.04), transparent 70%),
-      radial-gradient(70% 45% at 50% 115%, rgba(0, 0, 0, 0.055), transparent 70%);
-  }
+body {
+  background: var(--background);
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background: linear-gradient(
-      to top,
-      #000000 0%,
-      #0a0a0a 45%,
-      #121212 100%
-    );
-  }
-
-  .aurora {
-    background:
-      radial-gradient(55% 45% at 50% -8%, rgba(255, 255, 255, 0.1), transparent 70%),
-      radial-gradient(40% 38% at -10% 40%, rgba(255, 255, 255, 0.055), transparent 70%),
-      radial-gradient(40% 38% at 110% 45%, rgba(255, 255, 255, 0.05), transparent 70%),
-      radial-gradient(60% 40% at 50% 112%, rgba(255, 255, 255, 0.08), transparent 70%),
-      radial-gradient(50% 40% at 50% 55%, rgba(255, 255, 255, 0.03), transparent 70%);
-  }
-}
-
+/* Kept as an empty layer: the Thābit pages paint their own flat --page. */
 .aurora {
   position: fixed;
   inset: 0;
@@ -121,13 +140,13 @@ body {
   inset: 0;
   z-index: 100;
   pointer-events: none;
-  opacity: 0.03;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @media (prefers-color-scheme: dark) {
   .grain {
-    opacity: 0.05;
+    opacity: 0.04;
   }
 }
 
@@ -219,15 +238,13 @@ body {
   padding: 4px;
   overflow: hidden;
   box-shadow:
-    0 -2px 4px rgba(0, 0, 0, 0.06),
-    0 10px 30px rgba(0, 0, 0, 0.02);
+    0 -2px 4px color-mix(in oklab, var(--ink) 6%, transparent),
+    0 10px 30px color-mix(in oklab, var(--ink) 3%, transparent);
 }
 
 @media (prefers-color-scheme: dark) {
   .device-frame {
-    box-shadow:
-      0 -2px 4px rgba(255, 255, 255, 0.04),
-      0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px color-mix(in oklab, #000 50%, transparent);
   }
 }
 
@@ -303,7 +320,7 @@ body {
   padding: 14px 18px;
   border: 1px solid var(--border);
   border-radius: 16px;
-  color: #d4574a;
+  color: var(--error);
   font-size: 14px;
   background: var(--elevated);
   text-align: left;
@@ -322,12 +339,12 @@ body {
 }
 
 ::selection {
-  background: var(--text-primary);
-  color: var(--background);
+  background: var(--mint);
+  color: var(--on-mint);
 }
 
 :focus-visible {
-  outline: 2px solid var(--border-strong);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 2px;
 }

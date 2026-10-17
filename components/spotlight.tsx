@@ -26,7 +26,7 @@ export default function Spotlight({
   return (
     <section
       id={id}
-      className={`border-b border-border ${surface ? "bg-surface" : ""}`}
+      className={`thabit-spotlight border-b border-border ${surface ? "bg-surface" : ""}`}
     >
       <div className="mx-auto grid max-w-6xl items-center gap-16 px-6 py-20 sm:py-28 lg:grid-cols-2">
         <div className={flip ? "lg:order-2" : ""}>

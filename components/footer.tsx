@@ -1,4 +1,4 @@
-import Logo from "@/components/logo";
+import BrandMark from "@/components/brand-mark";
 import { APP_STORE_URL, PLAY_STORE_URL } from "@/components/store-badges";
 
 export default function Footer() {
@@ -6,11 +6,11 @@ export default function Footer() {
     <footer className="border-t border-border">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 px-6 py-12 text-center md:flex-row md:justify-between md:text-left">
         <div className="flex items-center gap-2.5 text-[16px] font-semibold tracking-tight text-primary">
-          <Logo className="h-7 w-auto" />
+          <BrandMark className="thabit-footer-mark h-7 w-auto" />
           Thābit
         </div>
         <nav
-          aria-label="Social"
+          aria-label="Footer"
           className="flex flex-wrap items-center justify-center gap-6 text-[13px] font-medium text-secondary"
         >
           <a
@@ -48,6 +48,9 @@ export default function Footer() {
           </a>
           <a href="/privacy" className="transition-colors hover:text-primary">
             Privacy
+          </a>
+          <a href="/terms" className="transition-colors hover:text-primary">
+            Terms
           </a>
           <a
             href="mailto:thabit@deenteachings.com"

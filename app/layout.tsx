@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Amiri } from "next/font/google";
 import "./globals.css";
 
@@ -27,6 +27,14 @@ export const metadata: Metadata = {
     siteName: "Thābit",
     type: "website",
   },
+};
+
+// Browser chrome follows the palette's --page in each mode.
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F4F4F1" },
+    { media: "(prefers-color-scheme: dark)", color: "#111110" },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

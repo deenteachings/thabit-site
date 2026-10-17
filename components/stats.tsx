@@ -1,8 +1,8 @@
 const STATS = [
-  { value: "35", label: "Sahih adhkar" },
-  { value: "9", label: "Daily practices" },
-  { value: "3", label: "Breath patterns" },
-  { value: "1", label: "Listening companion" },
+  { value: "Remember", label: "Morning & evening adhkar" },
+  { value: "Reflect", label: "Space for your thoughts" },
+  { value: "Rest", label: "Recitations & quiet moments" },
+  { value: "Return", label: "One small step at a time" },
 ];
 
 export default function Stats() {

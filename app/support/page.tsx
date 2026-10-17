@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import BrandMark from "@/components/brand-mark";
 import LegalShell from "@/components/legal-shell";
 import {
   ArrowIcon,
@@ -179,7 +180,7 @@ export default function SupportPage() {
         <div className="legal-hero-inner">
           <div>
             <p className="legal-eyebrow">
-              <span aria-hidden="true">✳</span>Thābit Support
+              <BrandMark />Thābit Support
             </p>
             <h1 id="support-title">
               We are here to <em>help.</em>
@@ -267,7 +268,7 @@ export default function SupportPage() {
       >
         <div className="contact-band-inner">
           <p className="legal-eyebrow">
-            <span aria-hidden="true">✳</span>Contact
+            <BrandMark />Contact
           </p>
           <h2 id="contact-title">I have another question.</h2>
           <p>

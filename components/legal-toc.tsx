@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-// Contents rail for the policy. Marks the section being read; without
-// JavaScript it is still a plain list of anchor links.
-export default function PolicyToc({
+// Contents rail for the privacy policy and terms. Marks the section being
+// read; without JavaScript it is still a plain list of anchor links.
+export default function LegalToc({
   sections,
 }: {
   sections: { id: string; title: string }[];

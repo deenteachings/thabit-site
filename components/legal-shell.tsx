@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BrandMark from "@/components/brand-mark";
 import Footer from "@/components/footer";
 import "@/app/home.css";
 import "@/app/legal.css";
@@ -6,11 +7,12 @@ import "@/app/legal.css";
 const LINKS = [
   { href: "/support", label: "Support", key: "support" },
   { href: "/privacy", label: "Privacy", key: "privacy" },
+  { href: "/terms", label: "Terms", key: "terms" },
 ] as const;
 
-// Shared frame for /support and /privacy: the home page's palette, header and
-// footer. The header keeps SiteNav's shape (brand, links, button) so the
-// home.css header rules apply unchanged.
+// Shared frame for /support, /privacy and /terms: the home page's palette,
+// header and footer. The header keeps SiteNav's shape (brand, links, button)
+// so the home.css header rules apply unchanged.
 export default function LegalShell({
   current,
   children,
@@ -29,7 +31,7 @@ export default function LegalShell({
             href="/"
             className="flex items-center gap-2.5 text-[17px] font-semibold tracking-tight text-primary"
           >
-            <span className="thabit-nav-symbol" aria-hidden="true">✳</span>
+            <BrandMark className="thabit-nav-mark" />
             Thābit
           </Link>
           <div className="legal-nav-links">
@@ -45,7 +47,7 @@ export default function LegalShell({
           </div>
           <Link
             href="/#download"
-            className="rounded-full bg-primary px-5 py-2.5 text-[13px] font-semibold text-primary-text transition-opacity hover:opacity-80"
+            className="rounded-full bg-action px-5 py-2.5 text-[13px] font-semibold text-action-text transition-opacity hover:opacity-80"
           >
             Get the app
           </Link>

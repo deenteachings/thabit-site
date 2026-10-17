@@ -1,6 +1,6 @@
 export default function QuranBlock() {
   return (
-    <section className="border-b border-border">
+    <section className="thabit-quote border-b border-border">
       <div className="mx-auto max-w-2xl px-6 py-24 text-center sm:py-32">
         <p className="section-label mb-10">Why we built this</p>
         <p

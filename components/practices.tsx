@@ -2,7 +2,6 @@ import {
   SunIcon,
   MindIcon,
   HeartIcon,
-  CompassIcon,
   PathIcon,
   SparkleIcon,
   BookIcon,
@@ -14,8 +13,7 @@ const PRACTICES = [
   { title: "Daily", meta: "Morning & evening", Icon: SunIcon },
   { title: "Mind", meta: "Calm · rest · focus", Icon: MindIcon },
   { title: "Healing", meta: "Qur'an · du'a · grief", Icon: HeartIcon },
-  { title: "Programs", meta: "Structured care", Icon: CompassIcon },
-  { title: "Journeys", meta: "Ramadan · grief · du'a", Icon: PathIcon },
+  { title: "Paths", meta: "One gentle step at a time", Icon: PathIcon },
   { title: "Soul", meta: "Your quiet progress", Icon: SparkleIcon },
   { title: "Journal", meta: "Private pages", Icon: BookIcon },
   { title: "Sleep", meta: "Solace audio", Icon: MoonIcon },
@@ -46,7 +44,7 @@ export default function Practices() {
         <div className="mb-14 max-w-2xl">
           <p className="section-label mb-4">Inside the app</p>
           <h2 className="display-large text-balance">
-            Nine quiet practices. Nothing asks too much.
+            Small practices. A little more steadiness.
           </h2>
         </div>
 

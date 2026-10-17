@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import BrandMark from "@/components/brand-mark";
 import LegalShell from "@/components/legal-shell";
-import PolicyToc from "./policy-toc";
+import LegalSection from "@/components/legal-section";
+import LegalToc from "@/components/legal-toc";
 import {
   ArrowIcon,
   ChatIcon,
@@ -82,18 +85,9 @@ function Section({
 }) {
   const { id, title } = SECTIONS[index];
   return (
-    <section
-      id={id}
-      className="policy-section legal-prose"
-      aria-labelledby={`${id}-title`}
-    >
-      <h2 id={`${id}-title`}>
-        <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-        <span className="sr-only">{index + 1}. </span>
-        {title}
-      </h2>
+    <LegalSection n={index + 1} id={id} title={title}>
       {children}
-    </section>
+    </LegalSection>
   );
 }
 
@@ -104,7 +98,7 @@ export default function PrivacyPage() {
         <div className="legal-hero-inner">
           <div>
             <p className="legal-eyebrow">
-              <span aria-hidden="true">✳</span>Privacy
+              <BrandMark />Privacy
             </p>
             <h1 id="privacy-title">
               Privacy Policy <em>— Thābit</em>
@@ -151,7 +145,7 @@ export default function PrivacyPage() {
       </section>
 
       <div className="policy-layout">
-        <PolicyToc sections={SECTIONS} />
+        <LegalToc sections={SECTIONS} />
 
         <article className="policy-doc">
           <Section index={0}>
@@ -222,7 +216,8 @@ export default function PrivacyPage() {
               users, without your name or email. Please do not include anything
               that identifies you or anyone else. You can report any request
               you see and block the person who posted it. We review reports and
-              remove content, and accounts, that break our Terms.
+              remove content, and accounts, that break our{" "}
+              <Link href="/terms">Terms</Link>.
             </p>
           </Section>
 

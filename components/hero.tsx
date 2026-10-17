@@ -1,71 +1,67 @@
-"use client";
-
-import { useSyncExternalStore } from "react";
-import Logo from "@/components/logo";
 import DeviceFrame from "@/components/device-frame";
 import StoreBadges from "@/components/store-badges";
-
-const emptySubscribe = () => () => {};
-const emptySnapshot = () => "";
-
-const getToday = () =>
-  new Intl.DateTimeFormat("en-GB", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  }).format(new Date());
-
-function useToday() {
-  return useSyncExternalStore(emptySubscribe, getToday, emptySnapshot);
-}
+import BrandMark from "@/components/brand-mark";
+import { SunIcon } from "@/components/icons";
 
 export default function Hero() {
-  const today = useToday();
-
   return (
-    <section className="relative overflow-hidden border-b border-border">
-      <div className="mx-auto flex max-w-6xl flex-col items-center px-6 pb-24 pt-16 text-center sm:pt-24">
-        <Logo className="mb-10 h-16 w-auto sm:h-20" />
-
-        <p className="rounded-full border border-border bg-elevated px-4 py-1.5 text-[12px] font-medium text-tertiary">
-          {today || "Today"}
-        </p>
-
-        <p className="mt-8 text-[26px] tracking-tight text-primary">
-          As-salamu alaykum,{" "}
-          <strong className="font-bold">you&apos;re safe here.</strong>
-        </p>
-
-        <h1 className="display-huge mt-4 max-w-4xl text-balance">
-          Feel held by Allah, not lectured at.
-        </h1>
-
-        <p className="mt-6 max-w-2xl text-balance text-[16px] leading-6 text-secondary">
-          Thābit is a gentle emotional healing companion — quiet adhkar, a
-          listening presence, and small daily practices rooted in authentic
-          sources. Now on the App Store and Google Play.
-        </p>
-
-        <StoreBadges className="mt-10" />
-
-        <div className="relative mt-20 flex items-end justify-center">
-          <DeviceFrame
-            src="/screens/sakinah.webp"
-            alt="Sakinah — the listening companion"
-            className="z-0 -mr-6 w-28 -rotate-6 translate-y-4 sm:-mr-10 sm:w-48"
-          />
-          <DeviceFrame
-            src="/screens/home.webp"
-            alt="Thābit home screen"
-            className="z-10 w-36 sm:w-64"
-            priority
-          />
-          <DeviceFrame
-            src="/screens/athkar.webp"
-            alt="Morning and evening adhkar"
-            className="z-0 -ml-6 w-28 rotate-6 translate-y-4 sm:-ml-10 sm:w-48"
-          />
+    <section className="thabit-hero">
+      <div className="thabit-hero-inner">
+        <div className="thabit-hero-copy">
+          <p className="section-label">
+            <BrandMark className="thabit-small-mark" />
+            A gentle companion for the Muslim heart
+          </p>
+          <h1>
+            A softer place
+            <br />
+            for your <em>heart.</em>
+          </h1>
+          <p className="thabit-salam">
+            As-salamu alaykum. You’re welcome here.
+          </p>
+          <p className="thabit-hero-description">
+            For the days that feel heavy, and the little moments in between.
+            Find quiet adhkar, a listening companion, and daily practices that
+            bring you back to Allah.
+          </p>
+          <StoreBadges className="thabit-hero-badges" />
+          <p className="thabit-hero-note">
+            Rooted in faith. Made with care. Begin at your own pace.
+          </p>
         </div>
+        <div className="thabit-hero-art">
+          <div className="thabit-arch" aria-hidden="true">
+            <span className="arabic" lang="ar" dir="rtl">
+              ثابت
+            </span>
+          </div>
+          <div className="thabit-hero-device">
+            <DeviceFrame
+              src="/screens/home.webp"
+              alt="The Thābit home screen, with daily practices and a gentle check-in"
+              priority
+            />
+          </div>
+          <div className="thabit-hero-caption">
+            <SunIcon />
+            <div>
+              A moment of stillness.
+              <br />
+              <strong>A small return to you.</strong>
+            </div>
+          </div>
+          <span className="thabit-art-note">
+            FAITH · REFLECTION · EVERYDAY CARE
+          </span>
+        </div>
+      </div>
+      <div className="thabit-hero-bottom">
+        <span>Come as you are.</span>
+        <a href="#practices">
+          Discover your quiet place <span aria-hidden="true">↓</span>
+        </a>
+        <span>No perfect days required.</span>
       </div>
     </section>
   );

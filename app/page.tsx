@@ -1,3 +1,4 @@
+import "./home.css";
 import SiteNav from "@/components/site-nav";
 import Hero from "@/components/hero";
 import QuranBlock from "@/components/quran-block";
@@ -11,7 +12,7 @@ import Footer from "@/components/footer";
 
 export default function Home() {
   return (
-    <>
+    <div className="thabit-home">
       <SiteNav />
       <main className="flex-1">
         <Hero />
@@ -43,7 +44,7 @@ export default function Home() {
           body="Morning and evening adhkar with full sahih references — and breathing patterns tied to the dhikr: Calm, Rest, Focus. Every exhale, a return."
           screens={[
             { src: "/screens/athkar.webp", alt: "Morning and evening adhkar" },
-            { src: "/screens/breathe.webp", alt: "Sujud breathing orb" },
+            { src: "/screens/breathe.webp", alt: "Guided breathing" },
           ]}
         />
         <ScreensStrip />
@@ -52,6 +53,6 @@ export default function Home() {
         <Download />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

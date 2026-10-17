@@ -1,24 +1,12 @@
+/* Thābit pages. Colours come from the palette tokens in globals.css, which
+   switch for dark mode on their own. */
 .thabit-home {
-  --background: #f9f7f1;
-  --surface: #eeede4;
-  --elevated: #fffdf7;
-  --pressed: #e7e9db;
-  --border: #dbdfd1;
-  --border-subtle: #e9eadf;
-  --border-strong: #344b3e;
-  --text-primary: #263e32;
-  --text-secondary: #667165;
-  --text-tertiary: #70786b;
-  --text-quaternary: #7c8376;
-  --primary: #263e32;
-  --primary-text: #fffdf6;
   background: var(--background);
   color: var(--text-primary);
-  color-scheme: light;
   overflow: clip;
 }
 .thabit-home header {
-  background: #f9f7f1ed;
+  background: color-mix(in oklab, var(--page) 92%, transparent);
   backdrop-filter: blur(16px);
 }
 .thabit-home header nav {
@@ -32,9 +20,10 @@
   font-weight: 400;
   gap: 10px;
 }
-.thabit-nav-symbol {
-  font-size: 32px;
-  color: #74855f;
+.thabit-nav-mark {
+  width: 30px;
+  height: auto;
+  color: var(--mark);
 }
 .thabit-home header nav > a:last-child {
   border-radius: 6px;
@@ -57,9 +46,10 @@
   font-size: 9px;
   letter-spacing: 1.9px;
 }
-.thabit-small-sun {
-  font-size: 23px;
-  color: #7e8d6b;
+.thabit-small-mark {
+  width: 18px;
+  height: auto;
+  color: var(--mark);
 }
 .thabit-hero h1 {
   font-family: Georgia, "Times New Roman", serif;
@@ -70,7 +60,7 @@
   margin: 27px 0;
 }
 .thabit-hero h1 em {
-  color: #7d8a60;
+  color: var(--accent-display);
   font-weight: 400;
 }
 .thabit-salam {
@@ -109,7 +99,7 @@
 .thabit-arch {
   position: absolute;
   inset: 0 10px 15px;
-  background: #e7e8d9;
+  background: var(--surface-2);
   border-radius: 230px 230px 14px 14px;
   overflow: hidden;
 }
@@ -117,7 +107,7 @@
 .thabit-arch:after {
   content: "";
   position: absolute;
-  border: 1px solid #cdd3bd;
+  border: 1px solid color-mix(in oklab, var(--mark) 26%, transparent);
   border-radius: 50%;
   width: 480px;
   height: 480px;
@@ -135,7 +125,7 @@
   top: 30px;
   right: 35px;
   font-size: 68px;
-  color: #c0c7ae;
+  color: color-mix(in oklab, var(--mark) 30%, transparent);
   transform: rotate(8deg);
 }
 .thabit-hero-device {
@@ -145,11 +135,11 @@
   margin-top: 16px;
 }
 .thabit-home .device-frame {
-  border: 5px solid #e4e5d8;
+  border: 5px solid var(--surface-2);
   padding: 2px;
   border-radius: 33px;
-  background: #fff;
-  box-shadow: 0 20px 40px -18px #243c3240;
+  background: var(--page);
+  box-shadow: 0 24px 44px -20px color-mix(in oklab, var(--pine-deep) 35%, transparent);
 }
 .thabit-home .device-screen {
   border-radius: 25px;
@@ -162,28 +152,30 @@
   display: flex;
   gap: 14px;
   align-items: center;
-  border: 1px solid #e3e4d8;
+  border: 1px solid var(--border);
   border-radius: 9px;
-  background: #fffcf2;
-  box-shadow: 0 8px 30px -20px #263e3260;
+  background: var(--page);
+  box-shadow: 0 12px 32px -20px color-mix(in oklab, var(--pine-deep) 45%, transparent);
   font-size: 11px;
   line-height: 1.7;
   transform: rotate(3deg);
 }
-.thabit-hero-caption > span {
-  font-size: 28px;
-  color: #849467;
+.thabit-hero-caption > svg {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  color: var(--mark);
 }
 .thabit-hero-caption strong {
   font-weight: 500;
-  color: #7a826f;
+  color: var(--text-secondary);
 }
 .thabit-art-note {
   position: absolute;
   bottom: -10px;
   font-size: 8px;
   letter-spacing: 2.5px;
-  color: #7c846c;
+  color: var(--text-secondary);
 }
 .thabit-hero-bottom {
   border-block: 1px solid var(--border);
@@ -196,7 +188,7 @@
   color: var(--text-tertiary);
 }
 .thabit-hero-bottom a {
-  color: var(--primary);
+  color: var(--accent);
 }
 .thabit-hero-bottom a span {
   margin-left: 18px;
@@ -209,12 +201,12 @@
   letter-spacing: -1.7px;
 }
 .thabit-home .section-label {
-  color: #788263;
+  color: var(--accent);
   font-size: 10px;
 }
 .thabit-quote {
   border: 0;
-  background: #f1f0e7;
+  background: var(--surface);
   margin: 60px 30px 0;
   border-radius: 10px;
 }
@@ -241,19 +233,19 @@
 .thabit-home #practices .grid > div {
   border: 1px solid var(--border);
   border-radius: 7px;
-  background: #f4f3eb;
+  background: var(--surface);
   align-items: flex-start;
   text-align: left;
   padding: 26px;
   gap: 11px;
 }
 .thabit-home #practices .grid > div:nth-child(3n + 2) {
-  background: #eef0e5;
+  background: var(--surface-2);
 }
 .thabit-home #practices .grid > div svg {
   width: 27px;
   height: 27px;
-  color: #819066;
+  color: var(--mark);
   margin-bottom: 10px;
 }
 .thabit-home #practices .grid > div h3 {
@@ -274,7 +266,7 @@
   max-width: 410px;
 }
 .thabit-spotlight > div > div:has(.device-frame) {
-  background: #e8ebde;
+  background: var(--surface-2);
   border-radius: 190px 190px 14px 14px;
   padding: 40px 18px;
   min-height: 500px;
@@ -289,7 +281,7 @@
   width: 45%;
 }
 .thabit-home #screens {
-  background: #eaede1;
+  background: var(--surface);
 }
 .thabit-home #screens figure {
   align-items: start;
@@ -320,7 +312,7 @@
   font-weight: 400;
 }
 .thabit-home #about {
-  background: #f3f0e7;
+  background: var(--surface);
 }
 .thabit-home #about > div {
   padding-block: 75px;
@@ -336,14 +328,15 @@
 .thabit-home #download {
   margin: 36px;
   border-radius: 12px;
-  background: #263e32;
-  --primary: #f4f5e8;
-  --primary-text: #263e32;
-  --text-primary: #f4f5e8;
-  --text-secondary: #d0d7c5;
-  --text-tertiary: #b5c2a4;
-  --border: #5c6d56;
-  color: #f4f5e8;
+  background: var(--band);
+  --primary: var(--on-band);
+  --primary-text: var(--pine-deep);
+  --text-primary: var(--on-band);
+  --text-secondary: var(--on-band-2);
+  --text-tertiary: var(--on-band-2);
+  --border: var(--band-line);
+  --border-strong: var(--on-band);
+  color: var(--on-band);
 }
 .thabit-home #download .display-medium {
   font:
@@ -352,7 +345,7 @@
   letter-spacing: -1.6px;
 }
 .thabit-home #download .section-label {
-  color: #c1cfae;
+  color: var(--on-band-2);
 }
 .thabit-home #download > div {
   padding-block: 75px;
@@ -367,15 +360,17 @@
   gap: 20px;
   font-size: 11px;
 }
-.thabit-home footer img[src*="logo-white"] {
-  display: none;
-}
-.thabit-home footer img[src*="logo-black"] {
-  display: block;
-  opacity: 0.7;
+.thabit-home footer .thabit-footer-mark {
+  width: 26px;
+  height: auto;
+  color: var(--mark);
 }
 .thabit-home :focus-visible {
-  outline-color: #8fa467;
+  outline-color: var(--accent);
+}
+
+.thabit-home #download :focus-visible {
+  outline-color: var(--on-band);
 }
 .thabit-home section[id] {
   scroll-margin-top: 100px;
