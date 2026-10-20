@@ -58,7 +58,13 @@ const SERVER_DATA: [string, string, string][] = [
   ["Push notification token", "Sending the notifications you turned on", "Until it stops working, you turn notifications off, or you delete your account"],
   ["Subscription status", "Unlocking Premium", "Until you delete your account"],
   ["Du'ā Together requests you post", "Showing your request to other Muslims so they can make du'ā for you", "Removed automatically 48 hours after posting, or when you delete your account"],
-  ["Reports you make about a du'ā, and people you block", "Keeping Du'ā Together safe", "Until you delete your account"],
+  ["Reports you make about a du'ā", "Keeping Du'ā Together safe", "30 days after the report is decided (30 days after the du'ā expires if it never is), or when you delete your account"],
+  ["People you block", "Keeping Du'ā Together safe", "Until you delete your account"],
+  ["A reported du'ā and its case: the du'ā's words, the reports and the decision", "Reviewing the report", "30 days after the case is decided, or when you delete your account"],
+  ["Record of reminders sent: your account id, the kind of reminder and when it was sent", "Not sending the same reminder twice", "30 days"],
+  ["That you agreed to the Du'ā Together community rules, and when", "Showing the rules once, before your first post, on every phone you use", "Until you delete your account"],
+  ["If you delete your account: your account id, kept only while we delete the usage analytics linked to it", "Before your account is deleted, the App sends the analytics it is still holding, stops collecting, and afterwards discards anything left. We then ask our analytics provider (PostHog) to delete your analytics three times: at once, a day later and a week later", "Removed once those requests are done, and never kept more than 30 days after you delete your account"],
+  ["A Sakinah reply you report: the reply's text (up to 1,000 characters), the reason you chose, and your account id. Never your own messages", "Reviewing the reply and making Sakinah safer", "30 days, or until you delete your account"],
   ["If an account is banned from Du'ā Together: a one-way, keyed fingerprint of its email address and of any Google or Apple sign-in linked to it", "Stopping a ban from being avoided by signing up again. The fingerprint cannot be turned back into the email address and is used for nothing else", "Kept after the account is deleted; removed if the ban is lifted"],
   ["Automatic safety screening of du'ā text", "Stopping harmful posts before anyone sees them", "30 days"],
   ["A record that a du'ā contained crisis language (your account id and the time, not the text)", "Making sure crisis resources are shown", "30 days"],
@@ -293,7 +299,9 @@ export default function PrivacyPage() {
                   We do not store your Sakinah conversations on our server.
                 </strong>{" "}
                 Your conversation history stays on your device, and you can
-                clear it in the App at any time.
+                clear it in the App at any time. The one exception is a reply
+                you report: that reply, with the reason you chose, is kept for
+                30 days so we can review it (see below).
               </li>
               <li>
                 Anthropic deletes API inputs and outputs within 30 days of
@@ -303,7 +311,9 @@ export default function PrivacyPage() {
               </li>
               <li>
                 If a reply seems wrong or harmful, long-press it to report it to
-                us.
+                us in the app. Only that reply and the reason you choose are sent
+                to our server, never your own messages; we keep the report for
+                30 days (see section 2).
               </li>
             </ul>
           </Section>
@@ -326,8 +336,11 @@ export default function PrivacyPage() {
                 brought you, if any. AppsFlyer uses your IP address to work out
                 the country you installed from. On iOS we use AppsFlyer&apos;s
                 strict mode, which does not collect the advertising identifier
-                (IDFA). We do not track you across other companies&apos; apps
-                or websites.
+                (IDFA). On Android it does not collect the advertising ID or the
+                app set ID, and AppsFlyer is not started when the App is opened
+                by a sign-in or password-reset link; on iOS those links are not
+                passed to it. We do not track you across other companies&apos;
+                apps or websites.
               </li>
               <li>
                 <strong>Crash reports (Sentry).</strong> If the App crashes we
@@ -386,13 +399,23 @@ export default function PrivacyPage() {
                 <strong>Delete your account.</strong> Settings → &quot;Delete
                 account&quot; permanently deletes your account and everything
                 our server holds about you (account, sessions, preferences, push
-                tokens, your cloud copy, du&apos;ā requests, reports and blocks; only a Du&apos;ā
-                Together ban fingerprint is kept, as described in section 2),
-                and wipes the App&apos;s data on your phone. If you signed in
+                tokens, your cloud copy, du&apos;ā requests, reports and blocks,
+                Sakinah reports; only a Du&apos;ā Together ban fingerprint is
+                kept, as described in section 2), and the usage analytics linked
+                to it, and wipes the App&apos;s data on your phone. If you signed in
                 with Apple, we also ask Apple to revoke Thābit&apos;s access to
                 your Apple ID. Deleting your account does not cancel an App
                 Store or Google Play subscription. Cancel that in your Apple
                 Account or Google Play settings.
+              </li>
+              <li>
+                <strong>Without the App</strong>, email
+                thabit@deenteachings.com from the email address on your account;
+                we delete it within 7 days (
+                <a href="https://deenteachings.com/thabit-support#delete-account">
+                  https://deenteachings.com/thabit-support#delete-account
+                </a>
+                ).
               </li>
               <li>
                 <strong>Turn off the cloud copy.</strong> Settings → &quot;Cloud
