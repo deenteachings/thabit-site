@@ -260,9 +260,11 @@ export default function PrivacyPage() {
               </li>
               <li>
                 <strong>Signing out</strong> clears the copied data from your
-                phone, after checking that your cloud copy holds all of it. If
-                another account signs in on the same phone, the cloud copy never
-                takes your data into that account&apos;s copy.
+                phone; with the cloud copy on, it first checks that your cloud
+                copy holds all of it. If another account signs in on the same
+                phone, the App shows it nothing of yours until it signs in to
+                your account or removes your data, and its cloud copy never
+                takes your data.
               </li>
               <li>
                 <strong>Turning it off</strong> (Settings → &quot;Cloud
@@ -412,8 +414,8 @@ export default function PrivacyPage() {
                 <strong>Without the App</strong>, email
                 thabit@deenteachings.com from the email address on your account;
                 we delete it within 7 days (
-                <a href="https://deenteachings.com/thabit-support#delete-account">
-                  https://deenteachings.com/thabit-support#delete-account
+                <a href="https://thabitapp.com/support#delete-account">
+                  https://thabitapp.com/support#delete-account
                 </a>
                 ).
               </li>
