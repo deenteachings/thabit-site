@@ -357,7 +357,13 @@ export default function TermsPage() {
           <Section index={12}>
             <p>
               You may delete your account at any time in Settings →
-              &quot;Delete account&quot;. Deletion is immediate and permanent.
+              &quot;Delete account&quot;, or without the App by emailing
+              thabit@deenteachings.com from the email address on your account;
+              we delete it within 7 days. Deletion is immediate and permanent,
+              except as described in{" "}
+              <a href="/privacy#our-server">Privacy Policy section 2</a>{" "}
+              (analytics deletion takes up to 30 days, and a Du&apos;ā Together
+              ban fingerprint is kept).
             </p>
             <p>
               We may suspend or terminate the App, your account, or specific
