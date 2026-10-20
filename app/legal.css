@@ -496,6 +496,14 @@
   color: var(--text-secondary);
 }
 
+.care-callout p + p {
+  margin-top: 12px;
+}
+
+#delete-account {
+  scroll-margin-top: 96px;
+}
+
 .contact-band {
   position: relative;
   overflow: hidden;

@@ -115,7 +115,8 @@ const GROUPS = [
             cannot be undone. Deleting your account does not cancel a Thābit
             Premium subscription: cancel that in your Apple Account settings
             (Settings → your name → Subscriptions) or in Google Play
-            subscriptions.
+            subscriptions. Without the app, see{" "}
+            <a href="#delete-account">Delete your account</a> below.
           </p>
         ),
       },
@@ -169,6 +170,7 @@ const GROUPS = [
 
 const JUMPS = [
   ...GROUPS.map(({ id, title, Icon }) => ({ id, title, Icon })),
+  { id: "delete-account", title: "Delete your account", Icon: PersonIcon },
   { id: "care", title: "Therapy & medical care", Icon: HeartIcon },
   { id: "contact", title: "Another question", Icon: MailIcon },
 ];
@@ -242,6 +244,52 @@ export default function SupportPage() {
             </div>
           </section>
         ))}
+
+        {/* The account-deletion page the App Store and Google Play link to
+            (thabitapp.com/support#delete-account). Shown open, never behind a
+            question: a store reviewer must see the steps without a tap. Kept
+            in step with thabit/legal/privacy-policy.md section 6. */}
+        <section
+          id="delete-account"
+          className="care-callout"
+          aria-labelledby="delete-account-title"
+        >
+          <PersonIcon />
+          <div>
+            <h2 id="delete-account-title">Delete your account</h2>
+            <p>
+              <strong>In the app:</strong> Settings → Delete account. This
+              permanently deletes your account and everything our server holds
+              about you (account, sessions, preferences, push tokens, your cloud
+              copy, du&apos;ā requests, reports and blocks, Sakinah reports),
+              and the usage analytics linked to it, and wipes the app&apos;s
+              data on your phone. If you signed in with Apple, we also ask
+              Apple to revoke Thābit&apos;s access to your Apple ID.
+            </p>
+            <p>
+              <strong>Without the app:</strong> email{" "}
+              <a href="mailto:thabit@deenteachings.com?subject=Delete%20my%20account">
+                thabit@deenteachings.com
+              </a>{" "}
+              from the email address on your account and ask us to delete it.
+              We delete it within 7 days.
+            </p>
+            <p>
+              <strong>What is kept:</strong> only if the account was banned
+              from Du&apos;ā Together, a one-way, keyed fingerprint of its email
+              address and of any Google or Apple sign-in linked to it, so the
+              ban cannot be avoided by signing up again; it cannot be turned
+              back into the email address. Our requests to delete your
+              analytics are finished within 30 days. See the{" "}
+              <Link href="/privacy#your-rights">Privacy Policy</Link>.
+            </p>
+            <p>
+              Deleting your account does not cancel an App Store or Google Play
+              subscription. Cancel that in your Apple Account or Google Play
+              settings.
+            </p>
+          </div>
+        </section>
 
         <section id="care" className="care-callout" aria-labelledby="care-title">
           <HeartIcon />
