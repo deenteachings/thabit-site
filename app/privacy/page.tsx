@@ -63,10 +63,11 @@ const SERVER_DATA: [string, string, string][] = [
   ["Automatic safety screening of du'ā text", "Stopping harmful posts before anyone sees them", "30 days"],
   ["A record that a du'ā contained crisis language (your account id and the time, not the text)", "Making sure crisis resources are shown", "30 days"],
   ["Daily message counters", "Applying the daily Sakinah limit", "About 2 days"],
+  ["Your cloud copy, only if you turn it on: sealed documents and voice notes that no one but you can open, and for each one its size and when it last changed", "Keeping your journal and what you choose safe across your phones", "Until you turn it off or delete your account"],
 ];
 
 const PROCESSORS: [string, string][] = [
-  ["Cloudflare, Inc.", "Our server, database, audio delivery and account emails"],
+  ["Cloudflare, Inc.", "Our server, database, audio delivery, account emails and your encrypted cloud copy"],
   ["Anthropic PBC", "Writing Sakinah's replies"],
   ["RevenueCat, Inc.", "Managing your subscription, linked to your account id"],
   ["Apple Inc. and Google LLC", "Payments through the App Store or Google Play; Sign in with Apple; Sign in with Google"],
@@ -116,7 +117,7 @@ export default function PrivacyPage() {
             </p>
             <p className="legal-meta">
               <span>
-                Last updated:<strong>16 October 2026</strong>
+                Last updated:<strong>20 October 2026</strong>
               </span>
               <span>(applies to Thābit 1.1.0 and later)</span>
             </p>
@@ -149,7 +150,12 @@ export default function PrivacyPage() {
 
         <article className="policy-doc">
           <Section index={0}>
-            <p>Most of what you put into Thābit never leaves your device:</p>
+            <p>
+              Most of what you put into Thābit never leaves your device. The
+              one exception is the cloud copy, which is off until you turn it
+              on, and even then leaves your phone only sealed so that we cannot
+              read it (see <a href="#cloud-copy">Your cloud copy</a> below):
+            </p>
             <ul>
               <li>
                 Journal entries, voice journal transcripts, mood check-ins,
@@ -158,8 +164,10 @@ export default function PrivacyPage() {
                 conversation history and your onboarding answers.
               </li>
               <li>
-                <strong>The Vault.</strong> Kept on your device only, encrypted
-                with XChaCha20-Poly1305 under a key generated on your device.
+                <strong>The Vault.</strong> Kept on your device, encrypted with
+                XChaCha20-Poly1305 under a key generated on your device. If you
+                turn on the cloud copy, a sealed copy of your locked entries is
+                kept there too.
               </li>
               <li>
                 <strong>Her Days.</strong> If you turn this on, the dates are
@@ -210,6 +218,52 @@ export default function PrivacyPage() {
                 </tbody>
               </table>
             </div>
+            <h3 id="cloud-copy">Your cloud copy</h3>
+            <p>
+              The cloud copy is optional and off until you turn it on in
+              Settings → &quot;Cloud copy&quot;. It keeps a copy of your journal
+              (including archived and locked entries), your letters, your loved
+              ones, the grief companion (the name, the days walked and your
+              voice memories), your mood log, your check-ins, and the voice
+              notes they hold. It never holds Her Days, your Sakinah
+              conversations, your health data or your onboarding answers.
+            </p>
+            <ul>
+              <li>
+                <strong>Only you can open it.</strong> Everything is sealed on
+                your phone with XChaCha20-Poly1305 before it is sent, under a key
+                made on your phone and kept in its secure storage (the Keychain
+                on iOS, the Keystore on Android). The key is shown to you once
+                as a recovery code, and again in Settings behind your
+                phone&apos;s lock. We never receive the key or the code, so we
+                cannot read your copy, and we cannot recover it or reset the
+                code for you. If you lose the code and every phone that holds
+                the key, no one can open the copy; &quot;Start fresh&quot;
+                deletes it and begins a new one.
+              </li>
+              <li>
+                <strong>What our server can see.</strong> That you have a copy,
+                which kinds of data it holds (for example &quot;journal&quot; or
+                &quot;letters&quot;), how large each part is, when it last
+                changed, and the random file names of your voice notes. Never
+                their words or sound.
+              </li>
+              <li>
+                <strong>Where it is kept.</strong> In private Cloudflare storage
+                that is never public, up to about 500 MB per account.
+              </li>
+              <li>
+                <strong>Signing out</strong> clears the copied data from your
+                phone, after checking that your cloud copy holds all of it. If
+                another account signs in on the same phone, the cloud copy never
+                takes your data into that account&apos;s copy.
+              </li>
+              <li>
+                <strong>Turning it off</strong> (Settings → &quot;Cloud
+                copy&quot; → &quot;Turn off cloud copy&quot;) deletes the copy
+                from our server. What is on your phone stays.
+              </li>
+            </ul>
             <p className="policy-note">
               <strong>Du&apos;ā Together is visible to other users.</strong>{" "}
               The text of a du&apos;ā request you post is shown to other Thābit
@@ -332,13 +386,20 @@ export default function PrivacyPage() {
                 <strong>Delete your account.</strong> Settings → &quot;Delete
                 account&quot; permanently deletes your account and everything
                 our server holds about you (account, sessions, preferences, push
-                tokens, du&apos;ā requests, reports and blocks; only a Du&apos;ā
+                tokens, your cloud copy, du&apos;ā requests, reports and blocks; only a Du&apos;ā
                 Together ban fingerprint is kept, as described in section 2),
                 and wipes the App&apos;s data on your phone. If you signed in
                 with Apple, we also ask Apple to revoke Thābit&apos;s access to
                 your Apple ID. Deleting your account does not cancel an App
                 Store or Google Play subscription. Cancel that in your Apple
                 Account or Google Play settings.
+              </li>
+              <li>
+                <strong>Turn off the cloud copy.</strong> Settings → &quot;Cloud
+                copy&quot; → &quot;Turn off cloud copy&quot; deletes your copy
+                from our server at once; anything a deletion could not remove
+                straight away is removed by our hourly clean-up. Your phone keeps
+                everything.
               </li>
               <li>
                 <strong>Export your data.</strong> Settings → &quot;Export my
@@ -390,7 +451,10 @@ export default function PrivacyPage() {
             <p>
               All traffic between the App and our server uses HTTPS. Passwords
               are stored only as salted hashes. The Vault and journal backups on
-              your phone are encrypted with XChaCha20-Poly1305. No system is
+              your phone are encrypted with XChaCha20-Poly1305. Your cloud copy
+              is sealed on your phone with XChaCha20-Poly1305 before it is sent,
+              under a key only your phones hold, so a breach of our server would
+              expose no words of it. No system is
               perfectly secure; if a breach affects your data we will tell you
               without undue delay.
             </p>

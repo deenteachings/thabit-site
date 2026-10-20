@@ -98,7 +98,7 @@ export default function TermsPage() {
             </p>
             <p className="legal-meta">
               <span>
-                Last updated:<strong>16 October 2026</strong>
+                Last updated:<strong>20 October 2026</strong>
               </span>
             </p>
           </div>
