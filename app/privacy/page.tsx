@@ -164,16 +164,16 @@ export default function PrivacyPage() {
             </p>
             <ul>
               <li>
-                Journal entries, voice journal transcripts, mood check-ins,
-                habits, athkar and dhikr progress, path progress, sleep logs,
+                Journal entries, voice notes, mood check-ins, habits, athkar
+                and dhikr progress, path progress, sleep logs,
                 letters, names you wish to remember, notes, your Sakinah
                 conversation history and your onboarding answers.
               </li>
               <li>
-                <strong>The Vault.</strong> Kept on your device, encrypted with
-                XChaCha20-Poly1305 under a key generated on your device. If you
-                turn on the cloud copy, a sealed copy of your locked entries is
-                kept there too.
+                <strong>The Vault.</strong> Encrypted on your device with
+                XChaCha20-Poly1305, under a key generated on your device. If you
+                turn on the cloud copy, it also keeps a sealed copy of your
+                locked entries.
               </li>
               <li>
                 <strong>Her Days.</strong> If you turn this on, the dates are
@@ -190,9 +190,13 @@ export default function PrivacyPage() {
                 writes to Apple Health or Health Connect.
               </li>
               <li>
-                <strong>Voice.</strong> When you speak a journal entry or a
-                message to Sakinah, speech is turned into text on your device.
-                The audio itself is never uploaded.
+                <strong>Voice.</strong> A voice message to Sakinah is turned
+                into text on your device, and only that text is sent, like a
+                typed message; its audio is never sent to us or to anyone else.
+                Voice notes in your journal and voice memories in the grief
+                companion stay on your device unless you turn on the cloud copy,
+                which seals them on your phone first so that we cannot hear them
+                (see <a href="#cloud-copy">Your cloud copy</a> below).
               </li>
               <li>
                 <strong>Face ID / fingerprint.</strong> The journal lock uses
