@@ -122,12 +122,29 @@ const GROUPS = [
       },
       {
         q: "What data does Thābit collect?",
+        // Word for word from thabit/legal/support-page-content.md, which
+        // records it against legal/privacy-policy.md; only the link is
+        // relative, because this site's /privacy is the current policy.
         a: (
           <p>
-            Very little. Your journal entries are stored on your device, not on
-            our servers. We collect your email address for authentication.
-            Sakinah conversations pass through our server to reach the AI, but
-            we do not store conversation logs. See our full privacy policy at{" "}
+            Your journal, Vault, mood and check-ins stay on your phone unless
+            you turn on the cloud copy, which is off until you do. It keeps
+            your journal (locked entries too), letters, loved ones, grief
+            companion, mood log, check-ins and their voice notes, sealed on
+            your phone before they leave, so our server holds them but cannot
+            read them. The key stays on your phone (or phones) and is shown to
+            you as a recovery code, which you can see again in Settings behind
+            your phone&apos;s lock; we never see it, so we cannot open your
+            copy or reset the code. Her Days and your sleep never leave your
+            phone. If you create an account we keep your email, and your name
+            if you give one. Sakinah messages pass through our server to
+            Anthropic, which deletes them within 30 days; we keep none, except
+            a reply you report, which we keep with your reason for 30 days so
+            a moderator can review it. Du&apos;ā Together requests are shown to
+            other readers for 48 hours. We use PostHog to see which parts of
+            the app are used (never what you write, say or feel), AppsFlyer to
+            see which link brought you, and Sentry for crash reports. We never
+            sell your data. Full details:{" "}
             <Link href="/privacy">/privacy</Link>.
           </p>
         ),
