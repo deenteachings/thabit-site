@@ -27,7 +27,9 @@ export const metadata: Metadata = {
 };
 
 // Answers are word for word from the Thābit 1.1.0 support page
-// (~/Downloads/deenteachings-site-update/thabit-support/index.html).
+// (~/Downloads/deenteachings-site-update/thabit-support/index.html), except
+// where an item says otherwise. The Google Play steps follow Google's own
+// help (support.google.com/googleplay answers 7018481 and 15574897).
 const GROUPS = [
   {
     id: "subscription",
@@ -39,8 +41,10 @@ const GROUPS = [
         a: (
           <>
             <p>
-              Thābit Premium is managed through your Apple App Store
-              subscription settings:
+              Thābit Premium is managed by the store you bought it from.
+            </p>
+            <p>
+              <strong>On iPhone:</strong>
             </p>
             <ol>
               <li>Open the Settings app on your iPhone</li>
@@ -53,6 +57,21 @@ const GROUPS = [
               profile → Subscriptions.
             </p>
             <p>
+              <strong>On Android:</strong>
+            </p>
+            <ol>
+              <li>
+                Go to your subscriptions in Google Play (
+                <a href="https://play.google.com/store/account/subscriptions">
+                  play.google.com/store/account/subscriptions
+                </a>
+                )
+              </li>
+              <li>Select Thābit Premium</li>
+              <li>Tap Cancel subscription</li>
+            </ol>
+            <p>
+              Uninstalling the app does not cancel your subscription.
               Cancellation takes effect at the end of your current billing
               period. You will retain Premium access until then.
             </p>
@@ -64,8 +83,10 @@ const GROUPS = [
         a: (
           <>
             <p>
-              Refunds are handled by Apple, not by us directly. To request a
-              refund:
+              Refunds are handled by the store you bought from.
+            </p>
+            <p>
+              <strong>On iPhone:</strong>
             </p>
             <ol>
               <li>
@@ -81,8 +102,30 @@ const GROUPS = [
               </li>
             </ol>
             <p>
-              We do not have the ability to issue refunds from our side, but
-              Apple&apos;s process is straightforward.
+              We cannot issue App Store refunds from our side, but Apple&apos;s
+              process is straightforward.
+            </p>
+            <p>
+              <strong>On Android:</strong>
+            </p>
+            <ol>
+              <li>
+                Open your Google Play order history (
+                <a href="https://play.google.com/store/account/orderhistory">
+                  play.google.com/store/account/orderhistory
+                </a>
+                ), or on play.google.com: your profile picture → Payments &amp;
+                subscriptions → Budget &amp; order history
+              </li>
+              <li>
+                Find your Thābit Premium purchase and select &quot;Report a
+                problem&quot;
+              </li>
+              <li>Choose the option that fits and say you want a refund</li>
+            </ol>
+            <p>
+              Google decides most requests within 1 to 4 days. More than 48
+              hours after you bought, email us and we will help.
             </p>
           </>
         ),
