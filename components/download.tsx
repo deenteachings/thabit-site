@@ -23,7 +23,7 @@ export default function Download() {
           >
             @thethabitapp
           </a>
-          . Made with intention. Sahih sources only.
+          . Made with intention. Authentic sources only, each one named.
         </p>
       </div>
     </section>

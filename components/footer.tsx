@@ -54,7 +54,7 @@ export default function Footer() {
           </a>
         </nav>
         <p className="text-[12px] text-tertiary">
-          © 2026 Thābit. Sahih sources only. Made with intention.
+          © 2026 Thābit. Authentic sources only. Made with intention.
         </p>
       </div>
     </footer>

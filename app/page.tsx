@@ -41,7 +41,7 @@ export default function Home() {
         <Spotlight
           label="Daily anchors"
           title="The tongue remembers what the heart forgets."
-          body="Morning and evening adhkar with full sahih references — and breathing patterns tied to the dhikr: Calm, Rest, Focus. Every exhale, a return."
+          body="Morning and evening adhkar, each with its source and grade — and breathing patterns tied to the dhikr: Calm, Rest, Focus. Every exhale, a return."
           screens={[
             { src: "/screens/athkar.webp", alt: "Morning and evening adhkar" },
             { src: "/screens/breathe.webp", alt: "Guided breathing" },
