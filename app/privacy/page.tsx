@@ -170,10 +170,10 @@ export default function PrivacyPage() {
                 conversation history and your onboarding answers.
               </li>
               <li>
-                <strong>The Vault.</strong> Encrypted on your device with
-                XChaCha20-Poly1305, under a key generated on your device. If you
-                turn on the cloud copy, it also keeps a sealed copy of your
-                locked entries.
+                <strong>Locked journal entries.</strong> Encrypted on your
+                device with XChaCha20-Poly1305, under a key generated on your
+                device. If you turn on the cloud copy, it also keeps a sealed
+                copy of them.
               </li>
               <li>
                 <strong>Her Days.</strong> If you turn this on, the dates are
@@ -434,8 +434,8 @@ export default function PrivacyPage() {
                 <strong>Export your data.</strong> Settings → &quot;Export my
                 data&quot; saves a JSON file of the App&apos;s data on your
                 phone. For your privacy it leaves out your Sakinah
-                conversations, Her Days, the Vault, your notes and your
-                onboarding answers.
+                conversations, Her Days, your locked journal entries, your
+                notes and your onboarding answers.
               </li>
               <li>
                 <strong>Turn off notifications</strong>, each one separately, in
@@ -479,8 +479,9 @@ export default function PrivacyPage() {
           <Section index={7}>
             <p>
               All traffic between the App and our server uses HTTPS. Passwords
-              are stored only as salted hashes. The Vault and journal backups on
-              your phone are encrypted with XChaCha20-Poly1305. Your cloud copy
+              are stored only as salted hashes. Your locked journal entries and
+              journal backups on your phone are encrypted with
+              XChaCha20-Poly1305. Your cloud copy
               is sealed on your phone with XChaCha20-Poly1305 before it is sent,
               under a key only your phones hold, so a breach of our server would
               expose no words of it. No system is

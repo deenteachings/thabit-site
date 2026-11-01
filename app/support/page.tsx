@@ -170,7 +170,7 @@ const GROUPS = [
         // relative, because this site's /privacy is the current policy.
         a: (
           <p>
-            Your journal, Vault, mood and check-ins stay on your phone unless
+            Your journal, mood and check-ins stay on your phone unless
             you turn on the cloud copy, which is off until you do. It keeps
             your journal (locked entries too), letters, loved ones, grief
             companion, mood log, check-ins and their voice notes, sealed on

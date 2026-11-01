@@ -259,9 +259,9 @@ export default function TermsPage() {
               the AI, showing your du&apos;ā request to other users in Du&apos;ā
               Together, screening it for safety, storing your progress, and
               keeping your sealed cloud copy if you turn it on. We never see
-              your journal, Vault or notes. Your notes never leave your device;
-              your journal and Vault stay there too unless you turn on the cloud
-              copy, which is sealed on your phone before it leaves, so we cannot
+              your journal (locked entries too) or notes. Your notes never
+              leave your device; your journal and its locked entries stay there
+              too unless you turn on the cloud copy, which is sealed on your phone before it leaves, so we cannot
               read it.
             </p>
           </Section>
