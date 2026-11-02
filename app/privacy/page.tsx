@@ -125,7 +125,7 @@ export default function PrivacyPage() {
               <span>
                 Last updated:<strong>20 October 2026</strong>
               </span>
-              <span>(applies to Thābit 1.1.0 and later)</span>
+              <span>(applies to Thābit 2.0.0 and later)</span>
             </p>
           </div>
 
@@ -387,7 +387,7 @@ export default function PrivacyPage() {
             </div>
             <p>
               Accounts created in Thābit 1.0 were held by Google Firebase. When
-              you sign in to 1.1.0, your account moves to our Cloudflare server
+              you sign in to 2.0.0, your account moves to our Cloudflare server
               under the same account id.
             </p>
             <p>

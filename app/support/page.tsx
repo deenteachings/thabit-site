@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Answers are word for word from the Thābit 1.1.0 support page
+// Answers are word for word from the Thābit 2.0.0 support page
 // (~/Downloads/deenteachings-site-update/thabit-support/index.html), except
 // where an item says otherwise. The Google Play steps follow Google's own
 // help (support.google.com/googleplay answers 7018481 and 15574897).
