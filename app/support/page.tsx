@@ -318,6 +318,10 @@ export default function SupportPage() {
           <div>
             <h2 id="delete-account-title">Delete your account</h2>
             <p>
+              For <strong>Thabit: Muslim Mental Wellness</strong>, by DeenTeachings, on Google Play
+              and the App Store.
+            </p>
+            <p>
               <strong>In the app:</strong> Settings → Delete account. This
               permanently deletes your account and everything our server holds
               about you (account, sessions, preferences, push tokens, your cloud
