@@ -16,15 +16,29 @@ const poppins = Poppins({
   weight: ["700", "800"],
 });
 
+// Noto Sans in two halves under one family name: basic Latin is preloaded for
+// the first paint; the Latin Extended file (the ā in Thābit, du'ā) is not
+// preloaded, and the browser fetches it, by its unicode-range, only when a
+// character on screen needs it.
 const notoSans = Noto_Sans({
   variable: "--font-noto",
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
+  // One metric-matched fallback is enough; the Latin Extended half declares it.
+  adjustFontFallback: false,
 });
 
+const notoSansExt = Noto_Sans({
+  variable: "--font-noto-ext",
+  subsets: ["latin-ext"],
+  preload: false,
+});
+
+// Qur'an and du'ā appear only below the fold, so Amiri is not preloaded.
 const amiri = Amiri({
   variable: "--font-amiri",
   subsets: ["arabic", "latin"],
   weight: ["400", "700"],
+  preload: false,
 });
 
 // The app's own UI faces for Arabic and Urdu, used only where the site shows
@@ -81,6 +95,8 @@ export const metadata: Metadata = {
 
 // Browser chrome follows the palette's --page in each mode.
 export const viewport: Viewport = {
+  // Lets the phone tab bar sit above the home indicator (safe-area insets).
+  viewportFit: "cover",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#F4F4F1" },
     { media: "(prefers-color-scheme: dark)", color: "#111110" },
@@ -95,7 +111,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${notoSans.variable} ${amiri.variable} ${naskh.variable} ${nastaliq.variable} h-full antialiased`}
+      className={`${poppins.variable} ${notoSans.variable} ${notoSansExt.variable} ${amiri.variable} ${naskh.variable} ${nastaliq.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

@@ -15,6 +15,7 @@ import OurPromise from "@/components/site/promise";
 import GetApp from "@/components/site/get-app";
 import Footer from "@/components/footer";
 import Reveals from "@/components/site/reveals";
+import TabBar, { type Tab } from "@/components/site/tab-bar";
 
 const LINKS = [
   { href: "#sakinah", label: "Sakinah" },
@@ -22,6 +23,15 @@ const LINKS = [
   { href: "#space", label: "Your Space" },
   { href: "#film", label: "Film" },
   { href: "/support", label: "Support" },
+];
+
+// The phone tab bar: five places, lit by the section on screen.
+const TABS: Tab[] = [
+  { href: "#top", label: "Home", icon: "house@light", iconOn: "house", sections: ["top", "heart"] },
+  { href: "#sakinah", label: "Sakinah", icon: "sparkle@light", iconOn: "sparkle", sections: ["sakinah"] },
+  { href: "#breathe", label: "Practices", icon: "squares-four", iconOn: "squares-four@fill", sections: ["breathe", "athkar", "meditation", "paths"] },
+  { href: "#space", label: "Space", icon: "palette@light", iconOn: "palette@fill", sections: ["space", "new", "screens"] },
+  { href: "#film", label: "Film", icon: "play@light", iconOn: "play", sections: ["film", "promise", "download"] },
 ];
 
 export default function Home() {
@@ -44,6 +54,7 @@ export default function Home() {
         <GetApp />
       </main>
       <Footer />
+      <TabBar tabs={TABS} />
       <Reveals />
     </div>
   );

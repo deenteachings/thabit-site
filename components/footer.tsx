@@ -38,6 +38,11 @@ export default function Footer() {
       <div className="wrap footer-base">
         <p>© 2026 Thābit. Authentic sources only. Made with intention.</p>
         <p>Published by DeenTeachings LLP</p>
+        <p className="footer-legal">
+          Apple and the Apple logo are trademarks of Apple Inc., registered in
+          the U.S. and other countries. App Store is a service mark of Apple
+          Inc. Google Play and the Google Play logo are trademarks of Google LLC.
+        </p>
       </div>
     </footer>
   );

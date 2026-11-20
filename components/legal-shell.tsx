@@ -1,5 +1,6 @@
 import Footer from "@/components/footer";
 import Nav from "@/components/site/nav";
+import TabBar, { type Tab } from "@/components/site/tab-bar";
 import "@/app/site.css";
 import "@/app/legal.css";
 
@@ -8,6 +9,13 @@ const LINKS = [
   { href: "/privacy", label: "Privacy", key: "privacy" },
   { href: "/terms", label: "Terms", key: "terms" },
 ] as const;
+
+const TABS: Tab[] = [
+  { href: "/", label: "Home", icon: "house@light", iconOn: "house" },
+  { href: "/support", label: "Support", icon: "question@light", iconOn: "question@fill" },
+  { href: "/privacy", label: "Privacy", icon: "shield-check", iconOn: "shield-check@fill" },
+  { href: "/terms", label: "Terms", icon: "file-text@light", iconOn: "file-text@fill" },
+];
 
 // Shared frame for /support, /privacy and /terms: the site's header and
 // footer around a paper field. The legal text inside is checked word for word
@@ -31,6 +39,7 @@ export default function LegalShell({
         {children}
       </main>
       <Footer />
+      <TabBar tabs={TABS} current={TABS.findIndex((t) => t.href === `/${current}`)} />
     </div>
   );
 }

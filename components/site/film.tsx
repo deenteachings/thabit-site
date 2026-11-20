@@ -16,22 +16,22 @@ export default function Film() {
 
   return (
     <section id="film" className="chapter field-ink" aria-labelledby="film-title">
-      <div className="wrap split split-flip">
-        <div className="split-copy">
-          <p className="micro" data-reveal>
-            The launch film
-          </p>
-          <h2 id="film-title" className="display" data-reveal style={{ "--d": "55ms" } as React.CSSProperties}>
-            Introducing
-            <span className="accent">Thābit.</span>
-          </h2>
-          <p className="body-lg" data-reveal style={{ "--d": "110ms" } as React.CSSProperties}>
-            A first look at 2.0 in 88 seconds, from &ldquo;How is your
-            heart?&rdquo; to Your Space. The film has no sound, so it can play
-            anywhere.
-          </p>
-        </div>
-        <div className="split-stage" data-reveal style={{ "--d": "110ms" } as React.CSSProperties}>
+      <div className="wrap center-copy">
+        <p className="micro" data-reveal>
+          The launch film
+        </p>
+        <h2 id="film-title" className="display" data-reveal style={{ "--d": "55ms" } as React.CSSProperties}>
+          Introducing
+          <span className="accent">Thābit.</span>
+        </h2>
+        <p className="body-lg" data-reveal style={{ "--d": "110ms" } as React.CSSProperties}>
+          A first look at 2.0 in 88 seconds, from &ldquo;How is your
+          heart?&rdquo; to Your Space. The film has no sound, so it can play
+          anywhere.
+        </p>
+      </div>
+      <div className="wrap film-stage">
+        <div data-reveal style={{ "--d": "165ms" } as React.CSSProperties}>
           <div className="phone film-phone">
             <div className="phone-glass">
               <video

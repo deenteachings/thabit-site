@@ -3,7 +3,7 @@ import AthkarDemo from "@/components/site/athkar-demo";
 export default function Athkar() {
   return (
     <section id="athkar" className="chapter field-paper" aria-labelledby="athkar-title">
-      <div className="wrap split">
+      <div className="wrap split split-flip">
         <div className="split-copy">
           <p className="micro" data-reveal>
             Morning and evening athkar

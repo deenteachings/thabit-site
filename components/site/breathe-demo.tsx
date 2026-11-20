@@ -72,8 +72,13 @@ export default function BreatheDemo() {
       }
       const ph = phases[idx];
       const x = (t - acc) / ph.secs;
-      const scale = still.current ? 0.86 : 0.68 + fullness(ph, x) * 0.32;
-      if (orb.current) orb.current.style.transform = `scale(${scale})`;
+      const f = fullness(ph, x);
+      const scale = still.current ? 0.86 : 0.68 + f * 0.32;
+      if (orb.current) {
+        orb.current.style.transform = `scale(${scale})`;
+        // The chapter's halo breathes with the same curve.
+        if (!still.current) orb.current.closest("section")?.style.setProperty("--breath", f.toFixed(3));
+      }
       if (bar.current) bar.current.style.transform = `scaleX(${(ms % cycleMs) / cycleMs})`;
       const left = Math.max(1, Math.ceil(ph.secs - (t - acc)));
       setView((v) =>
@@ -119,6 +124,7 @@ export default function BreatheDemo() {
 
   function reset(next = pi) {
     cancelAnimationFrame(raf.current);
+    orb.current?.closest("section")?.style.removeProperty("--breath");
     elapsed.current = 0;
     last.current = null;
     const ph = phasesOf(BREATH_PATTERNS[next]);
