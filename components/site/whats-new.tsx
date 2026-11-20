@@ -85,7 +85,8 @@ export default function WhatsNew() {
 
       <div className="wrap">
         <ul className="new-list">
-          {WHATS_NEW.map((w, i) => (
+          {/* The viewer above already shows its four; the list carries the rest. */}
+          {WHATS_NEW.filter((w) => !VIEWS.some((v) => v.name === w.name)).map((w, i) => (
             <li key={w.name} data-reveal style={{ "--d": `${140 + Math.min(i, 6) * 55}ms` } as React.CSSProperties}>
               <span className="new-name">{w.name}</span>
               <span className="new-text">{w.text}</span>

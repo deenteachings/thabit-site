@@ -80,7 +80,7 @@
 
 .chapter {
   position: relative;
-  padding-block: clamp(88px, 11vw, 152px);
+  padding-block: clamp(72px, 8.5vw, 120px);
   background: var(--f-bg);
   color: var(--f-ink);
   scroll-margin-top: 72px;
@@ -479,7 +479,7 @@ html[data-platform="android"] .badge-google {
 }
 
 .split + .split {
-  margin-top: clamp(96px, 12vw, 160px);
+  margin-top: clamp(80px, 9vw, 128px);
 }
 
 .split-flip .split-copy {
@@ -1716,7 +1716,7 @@ html[data-platform="android"] .badge-google {
 .new-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-  margin-top: clamp(72px, 9vw, 120px);
+  margin-top: clamp(56px, 7vw, 96px);
   border-top: 1px solid var(--f-line);
   border-inline-start: 1px solid var(--f-line);
 }
