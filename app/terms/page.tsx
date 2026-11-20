@@ -365,7 +365,7 @@ export default function TermsPage() {
               thabit@deenteachings.com from the email address on your account;
               we delete it within 7 days. Deletion is immediate and permanent,
               except as described in{" "}
-              <a href="/privacy#our-server">Privacy Policy section 2</a>{" "}
+              <Link href="/privacy#our-server">Privacy Policy section 2</Link>{" "}
               (analytics deletion takes up to 30 days, and a Du&apos;ā Together
               ban fingerprint is kept).
             </p>

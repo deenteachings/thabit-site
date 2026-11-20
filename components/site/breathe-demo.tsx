@@ -4,15 +4,48 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Glyph from "@/components/site/glyph";
 import { BREATH_CYCLES, BREATH_PATTERNS, type BreathPattern } from "@/components/site/data";
 
-type Phase = { key: "inhale" | "hold1" | "exhale" | "hold2"; label: string; secs: number };
+type Phase = { key: "inhale" | "hold1" | "exhale" | "hold2"; secs: number };
+
+/** The app's own words for the breathing screen (app/breathing.tsx keys). */
+export type BreatheLabels = {
+  title: string;
+  patterns: Record<"calm" | "rest" | "focus", string>;
+  phases: Record<Phase["key"], string>;
+  caption: Record<Phase["key"], string>;
+  phaseOf: string; // "PHASE {n} OF {total}"
+  ofSpace: string;
+  firstRun: string;
+  perCycle: string;
+  begin: string;
+  pause: string;
+  cont: string;
+  /** countPhrase output: "sec:4", "breaths:3". */
+  counts: Record<string, string>;
+};
+
+const SECS = [2, 4, 6, 7, 8, 16, 19];
+export const BREATHE_EN: BreatheLabels = {
+  title: "Breathing",
+  patterns: { calm: "Calm", rest: "Rest", focus: "Focus" },
+  phases: { inhale: "Inhale", hold1: "Hold", exhale: "Exhale", hold2: "Rest" },
+  caption: { inhale: "IN", hold1: "HOLD", exhale: "OUT", hold2: "REST" },
+  phaseOf: "PHASE {n} OF {total}",
+  ofSpace: "of space",
+  firstRun: "Three slow breaths, under a minute. You can stop whenever you need.",
+  perCycle: "Per cycle",
+  begin: "Begin session",
+  pause: "Pause",
+  cont: "Continue",
+  counts: { ...Object.fromEntries(SECS.map((n) => [`sec:${n}`, `${n} sec`])), "breaths:3": "3 breaths" },
+};
 
 // app/breathing.tsx: inhale, hold, exhale, rest; a zero phase is skipped.
 function phasesOf(p: BreathPattern): Phase[] {
   const all: Phase[] = [
-    { key: "inhale", label: "Inhale", secs: p.inhale },
-    { key: "hold1", label: "Hold", secs: p.hold1 },
-    { key: "exhale", label: "Exhale", secs: p.exhale },
-    { key: "hold2", label: "Rest", secs: p.hold2 },
+    { key: "inhale", secs: p.inhale },
+    { key: "hold1", secs: p.hold1 },
+    { key: "exhale", secs: p.exhale },
+    { key: "hold2", secs: p.hold2 },
   ];
   return all.filter((ph) => ph.secs > 0);
 }
@@ -33,7 +66,7 @@ const clock = (ms: number) => {
 
 type Status = "idle" | "running" | "paused" | "done";
 
-export default function BreatheDemo() {
+export default function BreatheDemo({ labels: L = BREATHE_EN }: { labels?: BreatheLabels }) {
   const [pi, setPi] = useState(0);
   const pattern = BREATH_PATTERNS[pi];
   const phases = useMemo(() => phasesOf(pattern), [pattern]);
@@ -151,20 +184,20 @@ export default function BreatheDemo() {
   const ph = phases[view.phase];
   const active = status === "running" || status === "paused";
   const inBreath = ph.key === "inhale" || ph.key === "hold1";
-  const caption = phases
-    .map((p) => `${{ inhale: "IN", hold1: "HOLD", exhale: "OUT", hold2: "REST" }[p.key]} ${p.secs} sec`)
-    .join(" · ");
+  // The app's idle caption: "IN 4 sec · HOLD 4 sec · OUT 6 sec · REST 2 sec".
+  const caption = phases.map((p) => `${L.caption[p.key]} ${L.counts[`sec:${p.secs}`]}`).join(" · ");
+  const phaseOf = L.phaseOf.replace("{n}", String(view.phase + 1)).replace("{total}", String(phases.length));
 
   return (
     <div className="breathe-card">
       <div className="breathe-head">
-        <span className="breathe-title">Breathing</span>
+        <span className="breathe-title">{L.title}</span>
         <span className="breathe-sub">
-          {view.cycles} / {BREATH_CYCLES} breaths
+          {view.cycles} / {L.counts[`breaths:${BREATH_CYCLES}`]}
         </span>
       </div>
 
-      <div className="breathe-patterns" role="radiogroup" aria-label="Breathing pattern">
+      <div className="breathe-patterns" role="radiogroup" aria-label={L.title}>
         {BREATH_PATTERNS.map((p, i) => (
           <button
             key={p.id}
@@ -174,7 +207,7 @@ export default function BreatheDemo() {
             className="chip"
             onClick={() => choose(i)}
           >
-            {p.name}
+            {L.patterns[p.id]}
           </button>
         ))}
       </div>
@@ -182,15 +215,13 @@ export default function BreatheDemo() {
       <div className="breathe-phase" aria-live="polite">
         {active ? (
           <>
-            <span className="micro">
-              Phase {view.phase + 1} of {phases.length}
-            </span>
-            <span className="breathe-word">{ph.label}</span>
+            <span className="micro">{phaseOf}</span>
+            <span className="breathe-word">{L.phases[ph.key]}</span>
           </>
         ) : (
           <>
             <span className="micro">{caption}</span>
-            <span className="breathe-word">{pattern.name}</span>
+            <span className="breathe-word">{L.patterns[pattern.id]}</span>
           </>
         )}
         <span className="breathe-dhikr" lang="ar" dir="rtl">
@@ -202,10 +233,10 @@ export default function BreatheDemo() {
       <div className="breathe-orb-wrap">
         <div className="breathe-orb" ref={orb}>
           <span className="breathe-count">
-            {active ? view.left : status === "done" ? BREATH_CYCLES : `~${cycleMs / 1000}`}
+            {active ? view.left : status === "done" ? BREATH_CYCLES : `~${L.counts[`sec:${cycleMs / 1000}`]}`}
           </span>
           <span className="breathe-count-label">
-            {active ? ph.label : status === "done" ? "breaths" : "sec per cycle"}
+            {active ? L.phases[ph.key] : status === "done" ? L.counts[`breaths:${BREATH_CYCLES}`] : L.perCycle}
           </span>
         </div>
       </div>
@@ -215,22 +246,22 @@ export default function BreatheDemo() {
       </div>
       <p className="breathe-space">
         {active || status === "done"
-          ? `${clock(view.elapsed)} of space`
-          : "Three slow breaths, under a minute. You can stop whenever you need."}
+          ? `${clock(view.elapsed)} ${L.ofSpace}`
+          : L.firstRun}
       </p>
 
       <button type="button" className="btn btn-ink breathe-cta" onClick={main}>
         {status === "running" ? (
           <>
-            <Glyph name="pause" className="btn-glyph" /> Pause
+            <Glyph name="pause" className="btn-glyph" /> {L.pause}
           </>
         ) : status === "paused" ? (
           <>
-            <Glyph name="play" className="btn-glyph" /> Continue
+            <Glyph name="play" className="btn-glyph" /> {L.cont}
           </>
         ) : (
           <>
-            <Glyph name="play" className="btn-glyph" /> Begin session
+            <Glyph name="play" className="btn-glyph" /> {L.begin}
           </>
         )}
       </button>

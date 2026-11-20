@@ -4,19 +4,45 @@ import { APP_STORE_URL, PLAY_STORE_URL } from "@/components/store-badges";
 
 const external = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-export default function Footer() {
+export type FooterLabels = {
+  tagline: string;
+  /** Column headings; English only. */
+  theApp?: string;
+  help?: string;
+  support: string;
+  privacy: string;
+  terms: string;
+  home: string;
+  /** The first line of the base row. */
+  base: string;
+  /** The app's translation notice, on localized pages. */
+  notice?: string;
+};
+
+const FOOTER_EN: FooterLabels = {
+  tagline: "Muslim mental wellness, in seven languages.",
+  theApp: "The app",
+  help: "Help",
+  support: "Support",
+  privacy: "Privacy",
+  terms: "Terms",
+  home: "/",
+  base: "© 2026 Thābit. Authentic sources only. Made with intention.",
+};
+
+export default function Footer({ labels: L = FOOTER_EN }: { labels?: FooterLabels }) {
   return (
     <footer className="site-footer">
       <div className="wrap footer-grid">
         <div className="footer-brand">
-          <Link href="/" className="site-brand">
+          <Link href={L.home} className="site-brand">
             <BrandMark className="site-brand-mark" />
             Thābit
           </Link>
-          <p>Muslim mental wellness, in seven languages.</p>
+          <p>{L.tagline}</p>
         </div>
-        <nav aria-label="Get the app" className="footer-col">
-          <p className="micro">The app</p>
+        <nav aria-label={L.theApp ?? "App Store, Google Play"} className="footer-col">
+          {L.theApp && <p className="micro">{L.theApp}</p>}
           <a href={APP_STORE_URL} {...external}>
             App Store
           </a>
@@ -27,18 +53,21 @@ export default function Footer() {
             @thethabitapp
           </a>
         </nav>
-        <nav aria-label="Help" className="footer-col">
-          <p className="micro">Help</p>
-          <Link href="/support">Support</Link>
-          <Link href="/privacy">Privacy</Link>
-          <Link href="/terms">Terms</Link>
+        <nav aria-label={L.help ?? L.support} className="footer-col">
+          {L.help && <p className="micro">{L.help}</p>}
+          <Link href="/support" lang="en">
+            {L.support}
+          </Link>
+          <Link href="/privacy">{L.privacy}</Link>
+          <Link href="/terms">{L.terms}</Link>
           <a href="mailto:thabit@deenteachings.com">thabit@deenteachings.com</a>
         </nav>
       </div>
       <div className="wrap footer-base">
-        <p>© 2026 Thābit. Authentic sources only. Made with intention.</p>
+        <p>{L.base}</p>
         <p>Published by DeenTeachings LLP</p>
-        <p className="footer-legal">
+        {L.notice && <p className="footer-notice">{L.notice}</p>}
+        <p className="footer-legal" lang="en">
           Apple and the Apple logo are trademarks of Apple Inc., registered in
           the U.S. and other countries. App Store is a service mark of Apple
           Inc. Google Play and the Google Play logo are trademarks of Google LLC.

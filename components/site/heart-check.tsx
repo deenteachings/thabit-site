@@ -23,8 +23,24 @@ const FONT: Record<string, string | undefined> = {
   ur: "var(--font-nastaliq)",
 };
 
-export default function HeartCheck() {
-  const [lang, setLang] = useState(0);
+export type HeartLabels = {
+  /** Mood labels, Heavy to Very light. */
+  moods: string[];
+  /** The line under the faces; only English has words for it. */
+  answers?: { none: string; heavy: string; light: string };
+};
+
+export const HEART_EN: HeartLabels = {
+  moods: MOOD_STEPS.map((m) => m.label),
+  answers: {
+    none: "Choose one. Nothing is saved here.",
+    heavy: "On a heavy answer, Home asks less of you: only the gentlest things stay, and nothing new is suggested.",
+    light: "Home reorders around the answer. The lighter the heart, the more it offers.",
+  },
+};
+
+export function HeartCard({ labels: L = HEART_EN, startLang = 0 }: { labels?: HeartLabels; startLang?: number }) {
+  const [lang, setLang] = useState(startLang);
   const [tier, setTier] = useState<number | null>(null);
   const faces = useRef<(HTMLButtonElement | null)[]>([]);
   const q = HEART_QUESTION[lang];
@@ -44,24 +60,7 @@ export default function HeartCheck() {
   const heavy = tier !== null && tier <= 2;
 
   return (
-    <section id="heart" className="chapter field-paper" aria-labelledby="heart-title">
-      <div className="wrap heart">
-        <div className="heart-copy">
-          <p className="micro" data-reveal>
-            First, it asks
-          </p>
-          <h2 id="heart-title" className="display" data-reveal style={{ "--d": "55ms" } as React.CSSProperties}>
-            One question,
-            <span className="accent">every day.</span>
-          </h2>
-          <p className="body-lg" data-reveal style={{ "--d": "110ms" } as React.CSSProperties}>
-            Every day, Home asks how the heart is. Tap a face and the screen
-            beneath reorders around the answer. The words are the app&apos;s
-            own, in all seven of its languages.
-          </p>
-        </div>
-
-        <div className="heart-card" data-reveal style={{ "--d": "165ms" } as React.CSSProperties}>
+        <div className="heart-card">
           <div className="lang-tabs" role="tablist" aria-label="Language">
             {HEART_QUESTION.map((l, i) => (
               <button
@@ -113,19 +112,42 @@ export default function HeartCheck() {
                       <path d={MOUTHS[i]} />
                     </svg>
                   </span>
-                  <span className="mood-label">{m.label}</span>
+                  <span className="mood-label">{L.moods[i]}</span>
                 </button>
               );
             })}
           </div>
 
-          <p className="heart-answer" aria-live="polite">
-            {tier === null
-              ? "Choose one. Nothing is saved here."
-              : heavy
-                ? "On a heavy answer, Home asks less of you: only the gentlest things stay, and nothing new is suggested."
-                : "Home reorders around the answer. The lighter the heart, the more it offers."}
+          {L.answers && (
+            <p className="heart-answer" aria-live="polite">
+              {tier === null ? L.answers.none : heavy ? L.answers.heavy : L.answers.light}
+            </p>
+          )}
+        </div>
+  );
+}
+
+export default function HeartCheck() {
+  return (
+    <section id="heart" className="chapter field-paper" aria-labelledby="heart-title">
+      <div className="wrap heart">
+        <div className="heart-copy">
+          <p className="micro" data-reveal>
+            First, it asks
           </p>
+          <h2 id="heart-title" className="display" data-reveal style={{ "--d": "55ms" } as React.CSSProperties}>
+            One question,
+            <span className="accent">every day.</span>
+          </h2>
+          <p className="body-lg" data-reveal style={{ "--d": "110ms" } as React.CSSProperties}>
+            Every day, Home asks how the heart is. Tap a face and the screen
+            beneath reorders around the answer. The words are the app&apos;s
+            own, in all seven of its languages.
+          </p>
+        </div>
+
+        <div data-reveal style={{ "--d": "165ms" } as React.CSSProperties}>
+          <HeartCard />
         </div>
       </div>
     </section>

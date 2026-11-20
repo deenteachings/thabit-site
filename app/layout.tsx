@@ -41,20 +41,26 @@ const amiri = Amiri({
   preload: false,
 });
 
-// The app's own UI faces for Arabic and Urdu, used only where the site shows
-// the app's words in those languages. Not preloaded: most visitors never see them.
+// The app's own UI faces for Arabic and Urdu (the /ar and /ur pages, and the
+// app's words in those languages). Not preloaded: most visitors never see them.
 const naskh = Noto_Naskh_Arabic({
   variable: "--font-naskh",
   subsets: ["arabic"],
-  weight: ["500"],
+  weight: ["500", "700"],
   preload: false,
+  // Latin letters inside Arabic text fall through to Noto Sans, not to a
+  // generated serif fallback.
+  adjustFontFallback: false,
 });
 
 const nastaliq = Noto_Nastaliq_Urdu({
   variable: "--font-nastaliq",
   subsets: ["arabic"],
-  weight: ["500"],
+  weight: ["500", "700"],
   preload: false,
+  // Latin letters inside Arabic text fall through to Noto Sans, not to a
+  // generated serif fallback.
+  adjustFontFallback: false,
 });
 
 const DESCRIPTION =

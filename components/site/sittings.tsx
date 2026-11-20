@@ -4,13 +4,26 @@ import { useRef, useState } from "react";
 import { SITTINGS } from "@/components/site/data";
 
 const TABS = [
-  { key: "morning", label: "Morning", items: SITTINGS.morning },
-  { key: "evening", label: "Evening", items: SITTINGS.evening },
-  { key: "hardDays", label: "Hard Days", items: SITTINGS.hardDays },
+  { key: "morning", items: SITTINGS.morning },
+  { key: "evening", items: SITTINGS.evening },
+  { key: "hardDays", items: SITTINGS.hardDays },
 ] as const;
 
+export type SittingsLabels = {
+  /** What the tab list is called (for screen readers). */
+  name: string;
+  tabs: Record<(typeof TABS)[number]["key"], string>;
+  /** Sitting titles by English title, in the reader's language. */
+  titles?: Record<string, string>;
+};
+
+export const SITTINGS_EN: SittingsLabels = {
+  name: "Sittings",
+  tabs: { morning: "Morning", evening: "Evening", hardDays: "Hard Days" },
+};
+
 // The Meditation tab's real sittings (data/dailyMeditation.ts, data/hardDays.ts).
-export default function Sittings() {
+export default function Sittings({ labels: L = SITTINGS_EN }: { labels?: SittingsLabels }) {
   const [tab, setTab] = useState(0);
   const btns = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -26,7 +39,7 @@ export default function Sittings() {
   const t = TABS[tab];
   return (
     <div className="sittings">
-      <div className="tabs" role="tablist" aria-label="Sittings">
+      <div className="tabs" role="tablist" aria-label={L.name}>
         {TABS.map((x, i) => (
           <button
             key={x.key}
@@ -43,7 +56,7 @@ export default function Sittings() {
             onClick={() => setTab(i)}
             onKeyDown={onKey}
           >
-            {x.label}
+            {L.tabs[x.key]}
             <span className="tab-count">{x.items.length}</span>
           </button>
         ))}
@@ -58,7 +71,7 @@ export default function Sittings() {
         {t.items.map((title, i) => (
           <li key={title} style={{ "--i": i } as React.CSSProperties}>
             <span className="sitting-n">{String(i + 1).padStart(2, "0")}</span>
-            {title}
+            {L.titles?.[title] ?? title}
           </li>
         ))}
       </ol>

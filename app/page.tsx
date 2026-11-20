@@ -19,6 +19,7 @@ import GetApp from "@/components/site/get-app";
 import Footer from "@/components/footer";
 import Reveals from "@/components/site/reveals";
 import StructuredData from "@/components/site/structured-data";
+import { LANGUAGES } from "@/components/site/i18n/types";
 import TabBar, { type Tab } from "@/components/site/tab-bar";
 
 const LINKS = [
@@ -30,7 +31,10 @@ const LINKS = [
 ];
 
 export const metadata: Metadata = {
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    languages: { ...Object.fromEntries(LANGUAGES.map((l) => [l.code, l.href])), "x-default": "/" },
+  },
 };
 
 // The phone tab bar: five places, lit by the section on screen.

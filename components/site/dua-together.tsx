@@ -18,9 +18,62 @@ const FACTS = [
   "Every request is checked before anyone sees it, any request can be reported, and anyone can be blocked.",
 ];
 
-export default function DuaTogether() {
-  const [made, setMade] = useState(false);
+export type DuaLabels = {
+  today: string;
+  title: string;
+  body: string;
+  button: string;
+  hadithEn: string;
+  src: string;
+  /** Shown only where the site has words for it (English). */
+  note?: string;
+};
 
+export const DUA_EN: DuaLabels = {
+  today: "Today",
+  title: "A Muslim needs your du'ā",
+  body: "You don't know their name. But your du'ā reaches a waiting heart — and the angel says Āmīn for you too.",
+  button: "I made du'ā",
+  hadithEn: HADITH.en,
+  src: HADITH.src,
+  note: "A preview: nothing is sent from this page.",
+};
+
+export function DuaCard({ labels: L = DUA_EN }: { labels?: DuaLabels }) {
+  const [made, setMade] = useState(false);
+  return (
+    <div className="dua-card">
+      <p className="micro dua-eyebrow">{L.today}</p>
+      <p className="dua-title">{L.title}</p>
+      <p className="dua-body">{L.body}</p>
+      <button
+        type="button"
+        className="btn btn-ink dua-btn"
+        aria-expanded={made}
+        aria-controls="dua-hadith"
+        onClick={() => setMade(true)}
+        disabled={made}
+      >
+        <Glyph name="heart" className="btn-glyph" />
+        {L.button}
+      </button>
+      <div id="dua-hadith" className="dua-hadith" data-open={made ? "" : undefined} aria-live="polite">
+        {made && (
+          <>
+            <p className="dua-ar" lang="ar" dir="rtl">
+              {HADITH.ar}
+            </p>
+            <p className="dua-en">{L.hadithEn}</p>
+            <p className="micro dua-src">{L.src}</p>
+          </>
+        )}
+      </div>
+      {L.note && <p className="dua-note">{L.note}</p>}
+    </div>
+  );
+}
+
+export default function DuaTogether() {
   return (
     <section id="dua" className="chapter field-ink" aria-labelledby="dua-title">
       <div className="wrap split">
@@ -45,37 +98,7 @@ export default function DuaTogether() {
         </div>
 
         <div className="split-stage" data-reveal style={{ "--d": "110ms" } as React.CSSProperties}>
-          <div className="dua-card">
-            <p className="micro dua-eyebrow">Today</p>
-            <p className="dua-title">A Muslim needs your du&apos;ā</p>
-            <p className="dua-body">
-              You don&apos;t know their name. But your du&apos;ā reaches a waiting
-              heart — and the angel says Āmīn for you too.
-            </p>
-            <button
-              type="button"
-              className="btn btn-ink dua-btn"
-              aria-expanded={made}
-              aria-controls="dua-hadith"
-              onClick={() => setMade(true)}
-              disabled={made}
-            >
-              <Glyph name="heart" className="btn-glyph" />
-              I made du&apos;ā
-            </button>
-            <div id="dua-hadith" className="dua-hadith" data-open={made ? "" : undefined} aria-live="polite">
-              {made && (
-                <>
-                  <p className="dua-ar" lang="ar" dir="rtl">
-                    {HADITH.ar}
-                  </p>
-                  <p className="dua-en">{HADITH.en}</p>
-                  <p className="micro dua-src">{HADITH.src}</p>
-                </>
-              )}
-            </div>
-            <p className="dua-note">A preview: nothing is sent from this page.</p>
-          </div>
+          <DuaCard />
         </div>
       </div>
     </section>
