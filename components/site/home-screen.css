@@ -94,17 +94,6 @@
 .fx-home-face-circle{transition:transform 200ms cubic-bezier(.23,1,.32,1)}
 .fx-home-face:active .fx-home-face-circle{transform:scale(.96)}
 .fx-home-face:focus-visible{outline:2px solid var(--fx-home-deep);outline-offset:calc(2*var(--pt))}
-/* What the app does when a mood is chosen (home.tsx chooseMood re-ranks;
-   recorded in the fragment's NOTES.md): the Mood row leaves, Daily Return
-   takes the third row and leaves the grid; Low keeps only The Floor, Heavy
-   keeps no tiles and no discovery; the hero stays Morning Athkar. */
-.fx-home-row-return{display:none;animation:fx-home-in 360ms cubic-bezier(.23,1,.32,1)}
-.fx-home:not([data-mood="none"]) .fx-home-row-checkin{display:none}
-.fx-home:not([data-mood="none"]) .fx-home-row-return{display:block}
-.fx-home:not([data-mood="none"]) .fx-home-tile-daily-return{display:none}
-.fx-home[data-mood="2"] :is(.fx-home-tile-dhikr,.fx-home-tile-gratitude,.fx-home-tile-discovery){display:none}
-.fx-home[data-mood="1"] .fx-home-tile{display:none}
-@keyframes fx-home-in{from{transform:translateY(calc(6*var(--pt)))}}
 /* On a desktop pointer the screen scrolls like the phone does. */
 @media (hover:hover) and (pointer:fine){
   .fx-home-scroll{overflow-y:auto;scrollbar-width:none;overscroll-behavior:auto}
@@ -112,6 +101,5 @@
   .fx-home-content{transform:none}
 }
 @media (prefers-reduced-motion:reduce){
-  .fx-home-row-return{animation:none}
   .fx-home-face-circle{transition:none}
 }

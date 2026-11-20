@@ -1,5 +1,6 @@
 import Greeting from "@/components/site/greeting";
 import LiveHome from "@/components/site/live-home";
+import morning from "@/components/site/home-screens/morning";
 import StoreBadges from "@/components/store-badges";
 
 // The app's splash, once (components/SplashGate.tsx): the Space glow rises,
@@ -40,7 +41,7 @@ export default function Hero() {
             />
           ))}
         </svg>
-        <LiveHome />
+        <LiveHome initial={morning[0]} />
       </div>
     </section>
   );

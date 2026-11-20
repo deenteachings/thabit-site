@@ -61,19 +61,17 @@ const DESCRIPTION =
   "When your heart is heavy, Thābit sits with you: a Muslim mental wellness companion with dhikr, du'ā, Qur'an, sleep, meditation and Sakinah, an AI companion who answers at 3am, rooted in the Qur'an and authentic Sunnah.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://thabitapp.com"),
+  // The site is served from www (the bare domain redirects there).
+  metadataBase: new URL("https://www.thabitapp.com"),
   title: "Thābit: Muslim Mental Wellness",
   description: DESCRIPTION,
-  icons: {
-    icon: [
-      { url: "/icon.png", media: "(prefers-color-scheme: light)" },
-      { url: "/icon-dark.png", media: "(prefers-color-scheme: dark)" },
-    ],
-  },
+  // app/icon.png and app/apple-icon.png: the Pine app icon (file conventions).
+  // iOS Safari shows Apple's Smart App Banner for the App Store app.
+  itunes: { appId: "6788482756" },
   openGraph: {
     title: "Thābit: Muslim Mental Wellness",
     description: DESCRIPTION,
-    url: "https://thabitapp.com",
+    url: "https://www.thabitapp.com",
     siteName: "Thābit",
     type: "website",
     images: [
@@ -103,9 +101,12 @@ export const viewport: Viewport = {
   ],
 };
 
-// Runs before first paint: marks that scripts run, so [data-reveal] content
-// may start hidden and rise in. Without JavaScript nothing is ever hidden.
-const REVEAL_FLAG = "document.documentElement.classList.add('js')";
+// Runs before first paint: marks that scripts run (so [data-reveal] content
+// may rise in) and the visitor's platform (so the right badge leads).
+const REVEAL_FLAG =
+  "document.documentElement.classList.add('js');" +
+  // Android visitors see the Google Play badge first.
+  "if(/android/i.test(navigator.userAgent))document.documentElement.dataset.platform='android'";
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
