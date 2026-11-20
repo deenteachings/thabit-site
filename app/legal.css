@@ -17,35 +17,6 @@
   scroll-margin-top: 110px;
 }
 
-/* ---------- Header links (between brand and button) ---------- */
-
-.legal-nav-links {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.legal-nav-links a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 14px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  transition: color 0.15s ease, background-color 0.15s ease;
-}
-
-.legal-nav-links a:hover {
-  color: var(--text-primary);
-}
-
-.legal-nav-links a[aria-current="page"] {
-  color: var(--text-primary);
-  background: var(--wash-alt);
-}
-
 /* ---------- Hero ---------- */
 
 .legal-hero {
@@ -81,18 +52,19 @@
 }
 
 .legal-hero h1 {
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 400;
-  font-size: clamp(48px, 5.4vw, 76px);
-  line-height: 1.04;
-  letter-spacing: -0.045em;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(42px, 5vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.035em;
   margin: 26px 0 24px;
   text-wrap: balance;
 }
 
 .legal-hero h1 em {
+  display: block;
+  font-style: normal;
   color: var(--accent-display);
-  font-weight: 400;
 }
 
 .legal-salam {
@@ -125,7 +97,7 @@
   min-height: 32px;
   padding: 0 13px;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--card);
   font-size: 12px;
   color: var(--text-secondary);
@@ -142,7 +114,7 @@
   position: relative;
   min-height: 460px;
   padding: 120px 34px 34px;
-  border-radius: 230px 230px 14px 14px;
+  border-radius: 0;
   background: var(--arch);
   overflow: hidden;
   display: flex;
@@ -189,7 +161,7 @@
   width: 100%;
   padding: 22px 22px 10px;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 0;
   background: var(--page);
   box-shadow: 0 18px 40px -26px color-mix(in oklab, var(--pine-deep) 45%, transparent);
 }
@@ -278,8 +250,8 @@
 }
 
 .faq-group-head h2 {
-  font-family: Georgia, serif;
-  font-weight: 400;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 30px;
   line-height: 1.15;
   letter-spacing: -0.03em;
@@ -299,7 +271,7 @@
 
 .faq {
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 0;
   background: var(--wash);
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
@@ -322,11 +294,12 @@
   padding: 18px 22px 18px 26px;
   cursor: pointer;
   list-style: none;
-  font-family: Georgia, serif;
+  font-family: var(--font-sans);
   font-size: 19px;
   line-height: 1.35;
   letter-spacing: -0.01em;
   color: var(--text-primary);
+  font-weight: 600;
 }
 
 .faq summary::-webkit-details-marker {
@@ -467,7 +440,7 @@
   gap: 28px;
   margin: 8px 0 64px 356px; /* lines up with the FAQ answers column */
   padding: 40px 44px;
-  border-radius: 10px;
+  border-radius: 0;
   background: var(--surface);
 }
 
@@ -481,8 +454,8 @@
 }
 
 .care-callout h2 {
-  font-family: Georgia, serif;
-  font-weight: 400;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 26px;
   line-height: 1.25;
   letter-spacing: -0.02em;
@@ -508,7 +481,7 @@
   position: relative;
   overflow: hidden;
   margin: 0 36px 36px;
-  border-radius: 12px;
+  border-radius: 0;
   background: var(--band);
   color: var(--on-band);
 }
@@ -554,8 +527,8 @@
 }
 
 .contact-band h2 {
-  font-family: Georgia, serif;
-  font-weight: 400;
+  font-family: var(--font-display);
+  font-weight: 800;
   font-size: clamp(34px, 4.6vw, 52px);
   line-height: 1.1;
   letter-spacing: -0.035em;
@@ -585,7 +558,7 @@
   gap: 10px;
   min-height: 54px;
   padding: 0 24px;
-  border-radius: 7px;
+  border-radius: 0;
   font-size: 15px;
   font-weight: 600;
   transition: opacity 0.15s ease, border-color 0.15s ease;
@@ -699,8 +672,8 @@
   display: flex;
   align-items: baseline;
   gap: 16px;
-  font-family: Georgia, serif;
-  font-weight: 400;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 32px;
   line-height: 1.15;
   letter-spacing: -0.03em;
@@ -716,8 +689,8 @@
 }
 
 .policy-section h3 {
-  font-family: Georgia, serif;
-  font-weight: 400;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 22px;
   line-height: 1.25;
   letter-spacing: -0.02em;
@@ -736,7 +709,7 @@
 .legal-table {
   margin-top: 18px;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 0;
   background: var(--card);
   overflow: hidden;
 }
@@ -784,7 +757,7 @@
   display: grid;
   gap: 1px;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 0;
   overflow: hidden;
   background: var(--border);
 }
@@ -816,7 +789,7 @@
 .policy-memorial {
   margin: 80px 0 40px;
   padding: 56px 24px;
-  border-radius: 10px;
+  border-radius: 0;
   background: var(--surface);
   text-align: center;
 }
@@ -831,10 +804,11 @@
 }
 
 .policy-memorial p {
-  font-family: Georgia, serif;
+  font-family: var(--font-sans);
   font-size: 18px;
   line-height: 1.7;
   color: var(--text-primary);
+  font-weight: 400;
 }
 
 /* ---------- Terms ---------- */
@@ -851,7 +825,7 @@
   padding: 18px 20px;
   border: 1px solid var(--border);
   border-top: 2px solid var(--sage);
-  border-radius: 8px;
+  border-radius: 0;
   background: var(--wash);
   font-size: 14px;
   line-height: 1.7;
@@ -956,7 +930,7 @@
     padding: 0 14px;
     min-height: 40px;
     border: 1px solid var(--border);
-    border-radius: 999px;
+    border-radius: 0;
     background: var(--card);
   }
 
@@ -967,14 +941,6 @@
 }
 
 @media (max-width: 640px) {
-  .thabit-legal header nav {
-    padding-inline: 16px;
-  }
-
-  .legal-nav-links {
-    display: none;
-  }
-
   .legal-hero-inner {
     padding: 36px 16px 48px;
   }
@@ -986,7 +952,7 @@
 
   .legal-arch {
     padding: 96px 14px 14px;
-    border-radius: 170px 170px 12px 12px;
+    border-radius: 0;
   }
 
   .legal-arch-word {
@@ -1080,7 +1046,7 @@
     margin-top: 10px;
     padding: 16px 18px;
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 0;
     background: var(--card);
   }
 
@@ -1094,9 +1060,9 @@
   }
 
   .legal-table td:first-child {
-    font-family: Georgia, serif;
+    font-family: var(--font-sans);
     font-size: 17px;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.4;
   }
 
@@ -1128,4 +1094,22 @@
   .legal-prose ul.terms-not {
     grid-template-columns: 1fr;
   }
+}
+
+/* ---------- The site's identity (2.0) ----------
+   The hero panel is the home page's deep pine stage, squared. */
+
+.legal-arch {
+  --arch-line: color-mix(in oklab, var(--mint) 24%, transparent);
+  background:
+    radial-gradient(70% 60% at 50% 30%, color-mix(in srgb, var(--pine-lit) 55%, transparent), transparent 75%),
+    var(--pine-deep);
+}
+
+.legal-arch-word {
+  color: color-mix(in oklab, var(--mint) 34%, transparent);
+}
+
+.legal-arch-card {
+  box-shadow: 0 24px 48px -28px color-mix(in oklab, #000 60%, transparent);
 }

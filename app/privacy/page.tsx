@@ -23,6 +23,7 @@ export const metadata: Metadata = {
       "What data Thābit collects, why, where it goes, how long it is kept, and what you can do about it.",
     url: "/privacy",
     siteName: "Thābit",
+    images: ["/og.png"],
   },
 };
 

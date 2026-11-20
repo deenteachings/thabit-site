@@ -101,9 +101,40 @@
   --color-quaternary: var(--text-quaternary);
   --color-accent: var(--accent);
   --color-mark: var(--mark);
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-    "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-noto), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-poppins), var(--font-sans);
   --font-arabic: var(--font-amiri), "Amiri", Georgia, serif;
+}
+
+/* ---------- Motion (the app's own values, constants/motion.ts) ----------
+   Entrances: 320ms fade with a 12px rise, never more. Presses settle at 0.97.
+   Stagger 140ms + 55ms per item. Under reduced motion nothing moves. */
+
+:root {
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --enter: 320ms;
+}
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--enter) var(--ease) var(--d, 0ms),
+    transform calc(var(--enter) + 160ms) var(--ease) var(--d, 0ms);
+}
+
+.js [data-reveal][data-in] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 html {
@@ -124,14 +155,6 @@ body {
 
 body {
   background: var(--background);
-}
-
-/* Kept as an empty layer: the Thābit pages paint their own flat --page. */
-.aurora {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
 }
 
 /* Film grain — monochrome fractal noise */
@@ -254,76 +277,6 @@ body {
   height: auto;
   border-radius: 28px;
   background: var(--surface);
-}
-
-/* ---------- asokit landing (/aso) ---------- */
-
-.input-hero {
-  width: 100%;
-  height: 56px;
-  padding: 0 22px;
-  font: inherit;
-  font-size: 16px;
-  color: var(--text-primary);
-  background: var(--elevated);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  outline: none;
-}
-
-.input-hero:focus {
-  border-color: var(--border-strong);
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 36px;
-  padding: 0 16px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--text-secondary);
-  font: inherit;
-  font-size: 13px;
-  cursor: pointer;
-  transition: border-color 0.15s ease, color 0.15s ease,
-    background-color 0.15s ease;
-}
-
-.chip:hover {
-  border-color: var(--border-strong);
-  color: var(--text-primary);
-}
-
-.chip-on {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: var(--primary-text);
-}
-
-.chip-on:hover {
-  color: var(--primary-text);
-  opacity: 0.9;
-}
-
-.detect-box {
-  padding: 14px 18px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: var(--elevated);
-  text-align: left;
-}
-
-.error-box {
-  padding: 14px 18px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  color: var(--error);
-  font-size: 14px;
-  background: var(--elevated);
-  text-align: left;
 }
 
 /* ---------- Motion preferences ---------- */

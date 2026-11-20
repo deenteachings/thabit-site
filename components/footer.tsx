@@ -1,61 +1,43 @@
+import Link from "next/link";
 import BrandMark from "@/components/brand-mark";
 import { APP_STORE_URL, PLAY_STORE_URL } from "@/components/store-badges";
 
+const external = { target: "_blank", rel: "noopener noreferrer" } as const;
+
 export default function Footer() {
   return (
-    <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 px-6 py-12 text-center md:flex-row md:justify-between md:text-left">
-        <div className="flex items-center gap-2.5 text-[16px] font-semibold tracking-tight text-primary">
-          <BrandMark className="thabit-footer-mark h-7 w-auto" />
-          Thābit
+    <footer className="site-footer">
+      <div className="wrap footer-grid">
+        <div className="footer-brand">
+          <Link href="/" className="site-brand">
+            <BrandMark className="site-brand-mark" />
+            Thābit
+          </Link>
+          <p>Muslim mental wellness, in seven languages.</p>
         </div>
-        <nav
-          aria-label="Footer"
-          className="flex flex-wrap items-center justify-center gap-6 text-[13px] font-medium text-secondary"
-        >
-          <a
-            href="https://instagram.com/thethabitapp"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors hover:text-primary"
-          >
-            @thethabitapp
-          </a>
-          <a
-            href={APP_STORE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors hover:text-primary"
-          >
+        <nav aria-label="Get the app" className="footer-col">
+          <p className="micro">The app</p>
+          <a href={APP_STORE_URL} {...external}>
             App Store
           </a>
-          <a
-            href={PLAY_STORE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors hover:text-primary"
-          >
+          <a href={PLAY_STORE_URL} {...external}>
             Google Play
           </a>
-          <a href="/support" className="transition-colors hover:text-primary">
-            Support
-          </a>
-          <a href="/privacy" className="transition-colors hover:text-primary">
-            Privacy
-          </a>
-          <a href="/terms" className="transition-colors hover:text-primary">
-            Terms
-          </a>
-          <a
-            href="mailto:thabit@deenteachings.com"
-            className="transition-colors hover:text-primary"
-          >
-            thabit@deenteachings.com
+          <a href="https://instagram.com/thethabitapp" {...external}>
+            @thethabitapp
           </a>
         </nav>
-        <p className="text-[12px] text-tertiary">
-          © 2026 Thābit. Authentic sources only. Made with intention.
-        </p>
+        <nav aria-label="Help" className="footer-col">
+          <p className="micro">Help</p>
+          <Link href="/support">Support</Link>
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/terms">Terms</Link>
+          <a href="mailto:thabit@deenteachings.com">thabit@deenteachings.com</a>
+        </nav>
+      </div>
+      <div className="wrap footer-base">
+        <p>© 2026 Thābit. Authentic sources only. Made with intention.</p>
+        <p>Published by DeenTeachings LLP</p>
       </div>
     </footer>
   );

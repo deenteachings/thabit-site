@@ -23,6 +23,7 @@ export const metadata: Metadata = {
       "Thābit app support — FAQ, account help, refunds, and contact information.",
     url: "/support",
     siteName: "Thābit",
+    images: ["/og.png"],
   },
 };
 

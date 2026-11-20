@@ -23,6 +23,7 @@ export const metadata: Metadata = {
       "The terms that govern your use of Thābit, published by DeenTeachings LLP.",
     url: "/terms",
     siteName: "Thābit",
+    images: ["/og.png"],
   },
 };
 
