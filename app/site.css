@@ -456,7 +456,7 @@
 
 @keyframes fade-in {
   from {
-    opacity: 0;
+    transform: scale(0.985);
   }
 }
 
@@ -561,12 +561,6 @@
 
 .greeting {
   min-width: 6ch;
-  transition: opacity var(--enter) var(--ease);
-  opacity: 0;
-}
-
-.greeting[data-ready] {
-  opacity: 1;
 }
 
 .hero .lede {
@@ -604,8 +598,7 @@
 
 @keyframes glow-rise {
   from {
-    opacity: 0;
-    transform: translateY(4%);
+    transform: translateY(4%) scale(0.96);
   }
 }
 
@@ -617,7 +610,6 @@
 
 @keyframes phone-rise {
   from {
-    opacity: 0;
     transform: translateY(12px);
   }
 }
@@ -981,7 +973,6 @@
 
 @keyframes msg-in {
   from {
-    opacity: 0;
     transform: translateY(12px);
   }
 }
@@ -1278,10 +1269,6 @@
 @keyframes count-pulse {
   0% {
     transform: scale(0.96);
-    opacity: 0.4;
-  }
-  30% {
-    opacity: 1;
   }
 }
 
@@ -1366,7 +1353,6 @@
 
 @keyframes row-in {
   from {
-    opacity: 0;
     transform: translateY(6px);
   }
 }

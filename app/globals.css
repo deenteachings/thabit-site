@@ -117,21 +117,19 @@
 }
 
 .js [data-reveal] {
-  opacity: 0;
   transform: translateY(12px);
-  transition:
-    opacity var(--enter) var(--ease) var(--d, 0ms),
-    transform calc(var(--enter) + 160ms) var(--ease) var(--d, 0ms);
+  transition: transform calc(var(--enter) + 160ms) var(--ease) var(--d, 0ms);
 }
 
+/* Content is never hidden waiting on motion: if a browser throttles
+   animation (battery saver, in-app browsers, background tabs), everything
+   is still on screen, only 12px lower. */
 .js [data-reveal][data-in] {
-  opacity: 1;
   transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .js [data-reveal] {
-    opacity: 1;
     transform: none;
     transition: none;
   }
